@@ -8,6 +8,7 @@ package napakalaki;
 /**
  *
  * @author Andresmag
+ * @author Algebro
  */
 public class Napakalaki {
 
@@ -15,7 +16,7 @@ public class Napakalaki {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
     }
     
 }
