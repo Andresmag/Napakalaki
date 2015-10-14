@@ -8,10 +8,17 @@ package napakalaki;
 /**
  *
  * @author Andresmag
+ * @author Algebro
  */
 public class Monster {
+ 
+    //Atributos
     private String name;
     private int combatLevel;
+    
+    //Atributos de otras clases
+    private Prize price;
+    private BadConsequence bc;
     
     //Consultores
     public String getName(){
@@ -22,10 +29,8 @@ public class Monster {
         return combatLevel;
     }
     
-    //Atributos de otras clases
-    private Prize price;
-    private BadConsequence bc;
     
+    //Constructor
     public Monster(String newName, int level, BadConsequence newBC, Prize newPrice){
         name = newName;
         combatLevel = level;
@@ -33,9 +38,9 @@ public class Monster {
         price = newPrice;
     }
     
-    //Implementación del método toString
+    //Implementación del método toString  (Por resvisar[Algebro])
     public String toString(){
-        return "Nombre = " + name + "Nivel = " +Integer.toString(combatLevel);
-        //Faltan cosas, supongo...
+        String resp = "\nNombre = " + name + "\tNivel = " +Integer.toString(combatLevel);
+        return resp;
     }
 }
