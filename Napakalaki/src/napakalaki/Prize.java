@@ -8,6 +8,7 @@ package napakalaki;
 /**
  *
  * @author Andresmag
+ * @author Algebro
  */
 public class Prize {
     private int treasures;
