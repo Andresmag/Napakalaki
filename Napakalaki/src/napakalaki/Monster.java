@@ -39,8 +39,11 @@ public class Monster {
     }
     
     //Implementación del método toString  (Por resvisar[Algebro])
+    @Override
     public String toString(){
         String resp = "\nNombre = " + name + "\tNivel = " +Integer.toString(combatLevel);
+        resp +=  price.toString();
+        resp += "\nMal rollo : " + bc.toString();
         return resp;
     }
 }

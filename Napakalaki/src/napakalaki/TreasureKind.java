@@ -8,6 +8,7 @@ package napakalaki;
 /**
  *
  * @author Andresmag
+ * @author Algebro
  */
 public enum TreasureKind {
     ARMOR, ONEHAND, BOTHHANDS, HELMET, SHOES;
