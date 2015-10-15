@@ -66,6 +66,7 @@ public class BadConsequence {
     }
     
     //Implementacion de la clase toString
+    @Override
     public String toString(){
         String resp = "\nTexto: \" " + text + " \" \nLevels = " + Integer.toString(levels) + "\tTesoros = " + Integer.toString(nVisibleTreasures + nHiddenTreasures);
         resp += "\nVisibles : " + Integer.toString(nVisibleTreasures) + "\nOcultos : " + Integer.toString(nHiddenTreasures);
