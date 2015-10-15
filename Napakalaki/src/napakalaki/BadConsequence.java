@@ -67,12 +67,14 @@ public class BadConsequence {
     
     //Implementacion de la clase toString
     public String toString(){
-        String resp = "\nTexto: \" " + text + " \" \nLevels = " + Integer.toString(levels) + "\tTesoros = " + Integer.toString(Treasures);
+        String resp = "\nTexto: \" " + text + " \" \nLevels = " + Integer.toString(levels) + "\tTesoros = " + Integer.toString(nVisibleTreasures + nHiddenTreasures);
         resp += "\nVisibles : " + Integer.toString(nVisibleTreasures) + "\nOcultos : " + Integer.toString(nHiddenTreasures);
-        resp += "\nMuerte : "
+        resp += "\nMuerte : ";
         if(death)
             resp+= "Sí";
         else
             resp+= "No";
+        
+        return resp;
     }
 }
