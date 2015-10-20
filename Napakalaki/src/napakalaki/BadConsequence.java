@@ -68,9 +68,12 @@ public class BadConsequence {
     //Implementacion de la clase toString
     @Override
     public String toString(){
+        String borraCorchetesVisible = specificVisibleTreasures.toString();
+        String borraCorchetesOculto = specificHiddenTreasures.toString();
         String resp = "\nTexto: \"" + text + "\" \nLevels = " + Integer.toString(levels) + "\tTesoros: " + " visbles = " + Integer.toString(nVisibleTreasures + specificVisibleTreasures.size())
                 + " ocultos = " + Integer.toString(nHiddenTreasures + specificHiddenTreasures.size());
-        resp += "\nVisibles : " + specificVisibleTreasures.toString() + "\nOcultos : " + specificHiddenTreasures.toString();
+        resp += "\nVisibles : " + borraCorchetesVisible.substring(1, borraCorchetesVisible.length()-1)
+                + "\nOcultos : " + borraCorchetesOculto.substring(1, borraCorchetesOculto.length()-1);
         resp += "\nMuerte : ";
         if(death)
             resp+= "Sí";
