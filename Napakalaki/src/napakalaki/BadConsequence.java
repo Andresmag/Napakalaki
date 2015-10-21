@@ -75,7 +75,7 @@ public class BadConsequence {
                 + " ocultos = " + Integer.toString(nHiddenTreasures + specificHiddenTreasures.size())
                 + "\nVisibles : " + borraCorchetesVisible.substring(1, borraCorchetesVisible.length()-1)
                 + "\nOcultos : " + borraCorchetesOculto.substring(1, borraCorchetesOculto.length()-1)
-                + "\nMuerte : "
+                + "\nMuerte : ";
         if(death)
             resp+= "Sí";
         else
