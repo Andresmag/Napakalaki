@@ -67,9 +67,7 @@ public class Napakalaki {
         
         //monstruos[4] = El gorron en el umbral
         badConsequence = new BadConsequence("Pierdes todos tus tesoros visibles",
-                0,
-                new ArrayList(Arrays.asList(TreasureKind.HELMET.ARMOR.ONEHAND.BOTHHANDS.SHOES)), //No estoy seguro de que se pueda
-                new ArrayList());
+                0,10,0);
         prize = new Prize(1, 3);
         monstruos.add(new Monster("El gorron en el umbral", 10, badConsequence, prize));
         
@@ -175,10 +173,10 @@ public class Napakalaki {
         monstruos.add(new Monster("El Lenguas", 20, badConsequence, prize));
         
         
-        //monstruos[18] = Bicefalo
+        //monstruos[18] = Bicefalo //REVISAR
         badConsequence = new BadConsequence("Te faltan manos para tanta cabeza. Pierdes 3 niveles y tus tesoros visibles de las manos",
                 0,
-                new ArrayList(Arrays.asList(TreasureKind.ONEHAND.BOTHHANDS)),  //Lo de perder todos los tesoros visibles de las manos no se como es, he probado asi pero dudo que lo sea
+                new ArrayList(Arrays.asList(TreasureKind.ONEHAND, TreasureKind.BOTHHANDS)), //Lo de perder todos los tesoros visibles de las manos no se como es, he probado asi pero dudo que lo sea
                 new ArrayList());
         prize = new Prize(1, 1);
         monstruos.add(new Monster("Bicefalo", 20, badConsequence, prize));
