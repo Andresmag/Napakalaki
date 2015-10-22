@@ -26,17 +26,45 @@ public class BadConsequence {
     private ArrayList<TreasureKind> specificVisibleTreasures = new ArrayList(); 
     
     //Constructores
+    
+    //Constructor Texto-Niveles-TesorosVisible-TesorosOcultos
     public BadConsequence(String newText, int newLevels, int nVisible, int nHidden){
         text = newText;
         levels = newLevels;
         nVisibleTreasures = nVisible;
         nHiddenTreasures = nHidden;
+        
+        death = false;
+        specificHiddenTreasures = null;
+        specificVisibleTreasures = null;
     }
     
+    //Constructor Texto-Muerte(bool)
     public BadConsequence(String newText, boolean newDeath){
         text = newText;
         death = newDeath;
+        
+        levels = 0;
+        nVisibleTreasures = 0;
+        nHiddenTreasures = 0;
+        specificHiddenTreasures = null;
+        specificVisibleTreasures = null;        
+        
     }
+    
+    //Constructor con listas (Texto-Niveles-ListaVisibles-ListaOcultos)
+    public BadConsequence(String newText, int newLevels, ArrayList<TreasureKind> tVisible,
+            ArrayList<TreasureKind> tHidden){
+        text = newText;
+        levels = newLevels;
+        specificVisibleTreasures = tVisible;
+        specificHiddenTreasures = tHidden;
+        
+        nVisibleTreasures = specificVisibleTreasures.size();
+        nHiddenTreasures = specificHiddenTreasures.size();        
+        
+        
+    }    
     
     //Consultores
     public String getText(){
@@ -56,23 +84,14 @@ public class BadConsequence {
     }
     
     
-    //Constructor con listas
-    public BadConsequence(String newText, int newLevels, ArrayList<TreasureKind> tVisible,
-            ArrayList<TreasureKind> tHidden){
-        text = newText;
-        levels = newLevels;
-        specificVisibleTreasures = tVisible;
-        specificHiddenTreasures = tHidden;
-    }
-    
     //Implementacion de la clase toString
     @Override
     public String toString(){
         String borraCorchetesVisible = specificVisibleTreasures.toString();
         String borraCorchetesOculto = specificHiddenTreasures.toString();
         String resp = "\nTexto: \"" + text + "\" \nLevels = " + Integer.toString(levels) + "\tTesoros: "
-                + " visbles = " + Integer.toString(nVisibleTreasures + specificVisibleTreasures.size())
-                + " ocultos = " + Integer.toString(nHiddenTreasures + specificHiddenTreasures.size())
+                + " visbles = " + Integer.toString(nVisibleTreasures)
+                + " ocultos = " + Integer.toString(nHiddenTreasures)
                 + "\nVisibles : " + borraCorchetesVisible.substring(1, borraCorchetesVisible.length()-1)
                 + "\nOcultos : " + borraCorchetesOculto.substring(1, borraCorchetesOculto.length()-1)
                 + "\nMuerte : ";
