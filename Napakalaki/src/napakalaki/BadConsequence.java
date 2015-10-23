@@ -35,8 +35,6 @@ public class BadConsequence {
         nHiddenTreasures = nHidden;
         
         death = false;
-        specificHiddenTreasures = null;
-        specificVisibleTreasures = null;
     }
     
     //Constructor Texto-Muerte(bool)
@@ -46,9 +44,7 @@ public class BadConsequence {
         
         levels = 0;
         nVisibleTreasures = 0;
-        nHiddenTreasures = 0;
-        specificHiddenTreasures = null;
-        specificVisibleTreasures = null;        
+        nHiddenTreasures = 0;        
         
     }
     
@@ -67,6 +63,14 @@ public class BadConsequence {
     }    
     
     //Consultores
+    public ArrayList<TreasureKind> getSpecificVisible(){
+        return specificVisibleTreasures;
+    }
+
+    public ArrayList<TreasureKind> getSpecificHidden(){
+        return specificHiddenTreasures;
+    }    
+    
     public String getText(){
         return text;
     }
@@ -83,6 +87,9 @@ public class BadConsequence {
         return nHiddenTreasures;
     }
     
+    public boolean getDeath (){
+        return death;
+    }
     
     //Implementacion de la clase toString
     @Override

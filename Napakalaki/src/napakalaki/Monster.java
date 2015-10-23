@@ -29,6 +29,13 @@ public class Monster {
         return combatLevel;
     }
     
+    public Prize getPrize (){
+        return price;
+    }
+    
+    public BadConsequence getBadConsequence (){
+        return bc;
+    }
     
     //Constructor
     public Monster(String newName, int level, BadConsequence newBC, Prize newPrice){

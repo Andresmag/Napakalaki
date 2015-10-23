@@ -17,7 +17,46 @@ public class Napakalaki {
 
     /**
      * @param args the command line arguments
+     *
      */
+    
+    //Consulta los monstruos con nivel mayor de "nivelminimo"
+    public static void ConsultaNivel(ArrayList<Monster> monstruos,int nivelminimo){
+        for(Monster monstruo : monstruos){
+            if(monstruo.getCombatLevel() > nivelminimo)
+                System.out.println(monstruo.toString());
+        }
+    }
+    
+    //Consulta los monstruos que solo implican perdida de niveles
+    public static void ConsultaSoloNiveles (ArrayList<Monster> monstruos){
+        boolean soloniveles;
+        for(Monster monstruo : monstruos){
+            soloniveles =(monstruo.getBadConsequence().getHiddenTreasures()==0 &&
+                          monstruo.getBadConsequence().getVisibleTreasures() == 0 &&
+                          !(monstruo.getBadConsequence().getDeath()) );
+            if(soloniveles)
+                System.out.println(monstruo.toString());
+        }    
+    }
+    
+    public static void ConsultaGananciaNivel (ArrayList<Monster> monstruos, int cantidadminima){
+         for(Monster monstruo : monstruos)
+            if(monstruo.getPrize().getLevel() > cantidadminima)
+                System.out.println(monstruo.toString());   
+    }
+    
+    public static void ConsultaTipoConcreto (ArrayList<Monster> monstruos, TreasureKind tipo){
+        boolean tipoencontrado;   
+        for(Monster monstruo : monstruos){
+            tipoencontrado = monstruo.getBadConsequence().getSpecificHidden().contains(tipo) ||
+                             monstruo.getBadConsequence().getSpecificVisible().contains(tipo);
+            if(tipoencontrado)
+                System.out.println(monstruo.toString());
+        }
+    }      
+            
+            
     public static void main(String[] args) {
         // Array contenedor de monstruos
         ArrayList<Monster> monstruos = new ArrayList();
@@ -182,9 +221,24 @@ public class Napakalaki {
         monstruos.add(new Monster("Bicefalo", 20, badConsequence, prize));
         
         
-        //Prueba de muestra por pantalla
-        System.out.println(monstruos.get(0).toString() );
-        System.out.println(monstruos.get(4).toString() );
+//     //Consultar monstruos con nivel superior a 'n'
+/*       int superiorNivelCombat = 10;
+       ConsultaNivel(monstruos,superiorNIvelCombat);
+*/
+        
+//     //Consultar monstruos cuyo premio son sólo niveles.
+/*       ConsultaSoloNiveles(monstrios);
+*/
+        
+//     //Consultar monstruos cuyo premio consta de más de 'n' niveles;
+/*       int superiorNivelPrize = 1;
+       ConsultaGananciaNivel(monstruos,superiorNivelPrize);
+*/ 
+        
+//     //Consultar monstruos cuya Consecuencia afecta a un objeto de tipo 'type'
+/*      TreasureKind type = TreasureKind.ARMOR;
+       ConsultaTipoConcreto(monstruos,type);
+*/
         
     }
     
