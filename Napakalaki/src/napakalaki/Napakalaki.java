@@ -226,9 +226,9 @@ public class Napakalaki {
        ConsultaNivel(monstruos,superiorNIvelCombat);
 */
         
-//     //Consultar monstruos cuyo premio son sólo niveles.
-/*       ConsultaSoloNiveles(monstrios);
-*/
+//     //Consultar monstruos cuyo BadConsequence implica sçolo perdida de niveles.
+//       ConsultaSoloNiveles(monstruos);
+
         
 //     //Consultar monstruos cuyo premio consta de más de 'n' niveles;
 /*       int superiorNivelPrize = 1;
