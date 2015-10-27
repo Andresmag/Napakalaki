@@ -22,6 +22,7 @@ public class Napakalaki {
     
     //Consulta los monstruos con nivel mayor de "nivelminimo"
     public static void ConsultaNivel(ArrayList<Monster> monstruos,int nivelminimo){
+        System.out.println("MONSTRUOS CON NIVEL SUPERIOR A " + nivelminimo + " :");
         for(Monster monstruo : monstruos){
             if(monstruo.getCombatLevel() > nivelminimo)
                 System.out.println(monstruo.toString());
@@ -30,6 +31,7 @@ public class Napakalaki {
     
     //Consulta los monstruos que solo implican perdida de niveles
     public static void ConsultaSoloNiveles (ArrayList<Monster> monstruos){
+        System.out.println("MONSTRUOS CUYO MAL ROLLO SOLO IMPLICA PERDIDA DE NIVELES:");
         boolean soloniveles;
         for(Monster monstruo : monstruos){
             soloniveles =(monstruo.getBadConsequence().getHiddenTreasures()==0 &&
@@ -41,12 +43,14 @@ public class Napakalaki {
     }
     
     public static void ConsultaGananciaNivel (ArrayList<Monster> monstruos, int cantidadminima){
+        System.out.println("MONSTRUOS CON LOS QUE GANAS MAS DE UN NIVEL:");
          for(Monster monstruo : monstruos)
             if(monstruo.getPrize().getLevel() > cantidadminima)
                 System.out.println(monstruo.toString());   
     }
     
     public static void ConsultaTipoConcreto (ArrayList<Monster> monstruos, TreasureKind tipo){
+        System.out.println("MONSTRUOS CON LOS QUE PIERDES EL OBJETO ESPECIFICO: " + tipo);
         boolean tipoencontrado;   
         for(Monster monstruo : monstruos){
             tipoencontrado = monstruo.getBadConsequence().getSpecificHidden().contains(tipo) ||
@@ -130,7 +134,7 @@ public class Napakalaki {
         
         
         //monstruos[7] = El rey de rosa
-        badConsequence = new BadConsequence("Pierdes 5 niveles y 3 tesoros",
+        badConsequence = new BadConsequence("Pierdes 5 niveles y 3 tesoros visibles",
                 5, 3, 0);
         prize = new Prize(2, 4);
         monstruos.add(new Monster("El rey de rosa", 13, badConsequence, prize));
@@ -215,7 +219,7 @@ public class Napakalaki {
         //monstruos[18] = Bicefalo //REVISAR
         badConsequence = new BadConsequence("Te faltan manos para tanta cabeza. Pierdes 3 niveles y tus tesoros visibles de las manos",
                 0,
-                new ArrayList(Arrays.asList(TreasureKind.ONEHAND, TreasureKind.BOTHHANDS)), //Lo de perder todos los tesoros visibles de las manos no se como es, he probado asi pero dudo que lo sea
+                new ArrayList(Arrays.asList(TreasureKind.ONEHAND, TreasureKind.ONEHAND, TreasureKind.BOTHHANDS)), //Lo de perder todos los tesoros visibles de las manos no se como es, he probado asi pero dudo que lo sea
                 new ArrayList());
         prize = new Prize(1, 1);
         monstruos.add(new Monster("Bicefalo", 20, badConsequence, prize));
@@ -225,8 +229,8 @@ public class Napakalaki {
 /*       int superiorNivelCombat = 10;
        ConsultaNivel(monstruos,superiorNIvelCombat);
 */
-        
-//     //Consultar monstruos cuyo BadConsequence implica sçolo perdida de niveles.
+    
+//     //Consultar monstruos cuyo BadConsequence implica solo perdida de niveles.
 //       ConsultaSoloNiveles(monstruos);
 
         
@@ -238,8 +242,6 @@ public class Napakalaki {
 //     //Consultar monstruos cuya Consecuencia afecta a un objeto de tipo 'type'
 /*      TreasureKind type = TreasureKind.ARMOR;
        ConsultaTipoConcreto(monstruos,type);
-*/
-        
+*/          
     }
-    
 }

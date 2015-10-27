@@ -56,10 +56,8 @@ public class BadConsequence {
         specificVisibleTreasures = tVisible;
         specificHiddenTreasures = tHidden;
         
-        nVisibleTreasures = specificVisibleTreasures.size();
-        nHiddenTreasures = specificHiddenTreasures.size();        
-        
-        
+        nVisibleTreasures = 0;
+        nHiddenTreasures = 0;        
     }    
     
     //Consultores
@@ -94,18 +92,31 @@ public class BadConsequence {
     //Implementacion de la clase toString
     @Override
     public String toString(){
-        String borraCorchetesVisible = specificVisibleTreasures.toString();
-        String borraCorchetesOculto = specificHiddenTreasures.toString();
-        String resp = "\nTexto: \"" + text + "\" \nLevels = " + Integer.toString(levels) + "\tTesoros: "
-                + " visbles = " + Integer.toString(nVisibleTreasures)
-                + " ocultos = " + Integer.toString(nHiddenTreasures)
-                + "\nVisibles : " + borraCorchetesVisible.substring(1, borraCorchetesVisible.length()-1)
-                + "\nOcultos : " + borraCorchetesOculto.substring(1, borraCorchetesOculto.length()-1)
-                + "\nMuerte : ";
+        String resp = text; 
         if(death)
-            resp+= "Sí";
+            resp+= "\nEstas muerto";
         else
-            resp+= "No";
+            if(levels != 0)
+                resp+= "\nNiveles que pierdes: " + Integer.toString(levels);
+            
+            if(nVisibleTreasures != 0 || nHiddenTreasures != 0)
+                resp += "\nTesoros perdidos: ";
+                if(nVisibleTreasures != 0)
+                    resp += "\n\t -> Visibles = " + Integer.toString(nVisibleTreasures);
+                if(nHiddenTreasures != 0)
+                    resp += "\n\t -> Ocultos = " + Integer.toString(nHiddenTreasures);
+            
+            if(specificVisibleTreasures.size() != 0 || specificHiddenTreasures.size() != 0)
+                resp += "\nTesoros especificos perdidos:";
+                String borraCorchetesOculto = specificHiddenTreasures.toString();
+                String borraCorchetesVisible = specificVisibleTreasures.toString();
+                
+                if(specificVisibleTreasures.size() != 0) 
+                    
+                    resp += "\n\t -> Visibles : " + borraCorchetesVisible.substring(1, borraCorchetesVisible.length()-1);
+                if(specificHiddenTreasures.size() != 0)
+                    
+                    resp += "\n\t -> Ocultos : " + borraCorchetesOculto.substring(1, borraCorchetesOculto.length()-1);
         
         return resp;
     }
