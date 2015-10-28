@@ -212,14 +212,14 @@ public class Napakalaki {
         //monstruos[17] = El lenguas
         badConsequence = new BadConsequence("Menudo susto te llevas. Pierdes 2 niveles y 5 tesoros visibles",
                 2, 5, 0);
-        prize = new Prize(1, 4);
+        prize = new Prize(1, 1);
         monstruos.add(new Monster("El Lenguas", 20, badConsequence, prize));
         
         
         //monstruos[18] = Bicefalo //REVISAR
         badConsequence = new BadConsequence("Te faltan manos para tanta cabeza. Pierdes 3 niveles y tus tesoros visibles de las manos",
                 0,
-                new ArrayList(Arrays.asList(TreasureKind.ONEHAND, TreasureKind.ONEHAND, TreasureKind.BOTHHANDS)), //Lo de perder todos los tesoros visibles de las manos no se como es, he probado asi pero dudo que lo sea
+                new ArrayList(Arrays.asList(TreasureKind.ONEHAND, TreasureKind.ONEHAND, TreasureKind.BOTHHANDS)), 
                 new ArrayList());
         prize = new Prize(1, 1);
         monstruos.add(new Monster("Bicefalo", 20, badConsequence, prize));
