@@ -242,6 +242,10 @@ public class Napakalaki {
 //     //Consultar monstruos cuya Consecuencia afecta a un objeto de tipo 'type'
 /*      TreasureKind type = TreasureKind.ARMOR;
        ConsultaTipoConcreto(monstruos,type);
-*/          
+*/     
+       // Para mostrar un monstruo
+        for(Monster monstruo : monstruos){
+            System.out.println(monstruo.toString());
+        }
     }
 }
