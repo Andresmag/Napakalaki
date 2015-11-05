@@ -32,4 +32,11 @@ public class Treasure {
         return type;
     }
     
+    @Override
+    public String toString(){
+        String resp = "Nombre del tesoro: " + name + "\nTipo de tesoro: " + type +
+                "\nBonificacion otorgada: " + bonus;
+        
+        return resp;
+    }
 }
