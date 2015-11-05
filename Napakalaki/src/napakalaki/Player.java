@@ -5,10 +5,23 @@
  */
 package napakalaki;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Alejandro
+ * @author Andresmag
  */
 class Player {
+    final static int MAXLEVEL = 10;
+    private String name;
+    private int level;
+    private boolean dead = true;
+    private boolean canISteal = true;
+    Player enemy;
+    private BadConsequence pendingBadConsequence;
+    ArrayList<Treasure> hiddenTreasures = new ArrayList <> ();
+    ArrayList<Treasure> visibleTreasures = new ArrayList <> ();
+   
     
 }
