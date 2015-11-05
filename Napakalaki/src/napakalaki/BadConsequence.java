@@ -14,6 +14,7 @@ import java.util.ArrayList;
  */
  
 public class BadConsequence {
+    final static int MAXTREASURES = 10;
     private String text;
     private int levels;
     private int nVisibleTreasures;
@@ -61,11 +62,11 @@ public class BadConsequence {
     }    
     
     //Consultores
-    public ArrayList<TreasureKind> getSpecificVisible(){
+    public ArrayList<TreasureKind> getSpecificVisibleTreasures(){
         return specificVisibleTreasures;
     }
 
-    public ArrayList<TreasureKind> getSpecificHidden(){
+    public ArrayList<TreasureKind> getSpecificHiddenTreasures(){
         return specificHiddenTreasures;
     }    
     
@@ -77,17 +78,37 @@ public class BadConsequence {
         return levels;
     }
     
-    public int getVisibleTreasures(){
+    public int getNVisibleTreasures(){
         return nVisibleTreasures;
     }
     
-    public int getHiddenTreasures(){
+    public int getNHiddenTreasures(){
         return nHiddenTreasures;
     }
     
     public boolean getDeath (){
         return death;
     }
+    
+    public void substractVisibleTreasure(Treasure t){
+        //FALTA POR IMPLEMENTAR
+    }
+    
+    public void substractHiddenTreasure(Treasure t){
+        //FALTA POR IMPLEMENTAR 
+    }
+    
+    public boolean isEmpty(){
+        //FALTA POR IMPLEMENTAR
+        return false;
+    }
+    
+    public BadConsequence adjustToFitTreasureLists(Treasure[] v , Treasure[] h){
+        //FALTA POR IMPLEMENTAR
+        return this;
+    }
+    
+    
     
     //Implementacion de la clase toString
     @Override
