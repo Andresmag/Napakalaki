@@ -90,25 +90,29 @@ public class BadConsequence {
         return death;
     }
     
-    public void substractVisibleTreasure(Treasure t){
-        //FALTA POR IMPLEMENTAR
+   public void substractVisibleTreasure(Treasure t){
+        specificVisibleTreasures.remove(t.getType());
     }
     
     public void substractHiddenTreasure(Treasure t){
-        //FALTA POR IMPLEMENTAR 
+        specificHiddenTreasures.remove(t.getType());
     }
     
     public boolean isEmpty(){
-        //FALTA POR IMPLEMENTAR
-        return false;
+        boolean esta_vacia = false;
+        if(nHiddenTreasures == 0 && nVisibleTreasures == 0 &&
+                specificHiddenTreasures.isEmpty() && specificVisibleTreasures.isEmpty())
+            esta_vacia = true;
+        
+        return esta_vacia;
     }
-    
-    public BadConsequence adjustToFitTreasureLists(Treasure[] v , Treasure[] h){
+
+/*    
+    public BadConsequence adjustToFitTreasureLists(ArrayList<Treasure> v , ArrayList<Treasure> h){
         //FALTA POR IMPLEMENTAR
         return this;
     }
-    
-    
+*/
     
     //Implementacion de la clase toString
     @Override
