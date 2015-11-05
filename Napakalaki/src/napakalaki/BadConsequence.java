@@ -127,15 +127,15 @@ public class BadConsequence {
                 if(nHiddenTreasures != 0)
                     resp += "\n\t -> Ocultos = " + Integer.toString(nHiddenTreasures);
             
-            if(specificVisibleTreasures.size() != 0 || specificHiddenTreasures.size() != 0)
+            if(specificVisibleTreasures.isEmpty() || specificHiddenTreasures.isEmpty())
                 resp += "\nTesoros especificos perdidos:";
                 String borraCorchetesOculto = specificHiddenTreasures.toString();
                 String borraCorchetesVisible = specificVisibleTreasures.toString();
                 
-                if(specificVisibleTreasures.size() != 0) 
+                if(specificVisibleTreasures.isEmpty()) 
                     
                     resp += "\n\t -> Visibles : " + borraCorchetesVisible.substring(1, borraCorchetesVisible.length()-1);
-                if(specificHiddenTreasures.size() != 0)
+                if(specificHiddenTreasures.isEmpty() )
                     
                     resp += "\n\t -> Ocultos : " + borraCorchetesOculto.substring(1, borraCorchetesOculto.length()-1);
         
