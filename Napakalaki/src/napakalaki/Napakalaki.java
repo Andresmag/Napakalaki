@@ -15,14 +15,14 @@ package napakalaki;
 
 public class Napakalaki {
     
-    private static final Napakalaki Instance = null;
+    private static final Napakalaki instance = null;
     
     //Constructor privado. (Quizás haya que modificarlo)
     private Napakalaki(){ }
     
  
     public static Napakalaki getInstance(){
-        return Instance;
+        return instance;
     }
     
     private void initPlayers (String[] players){
