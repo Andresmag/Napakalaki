@@ -13,7 +13,7 @@ import java.util.Arrays;
  * @author Andresmag
  * @author Algebro
  */
-public class Napakalaki {
+public class PruebaNapakalaki {
 
     /**
      * @param args the command line arguments
@@ -34,8 +34,8 @@ public class Napakalaki {
         System.out.println("MONSTRUOS CUYO MAL ROLLO SOLO IMPLICA PERDIDA DE NIVELES:");
         boolean soloniveles;
         for(Monster monstruo : monstruos){
-            soloniveles =(monstruo.getBadConsequence().getHiddenTreasures()==0 &&
-                          monstruo.getBadConsequence().getVisibleTreasures() == 0 &&
+            soloniveles =(monstruo.getBadConsequence().getNHiddenTreasures()==0 &&
+                          monstruo.getBadConsequence().getNVisibleTreasures() == 0 &&
                           !(monstruo.getBadConsequence().getDeath()) );
             if(soloniveles)
                 System.out.println(monstruo.toString());
@@ -53,8 +53,8 @@ public class Napakalaki {
         System.out.println("MONSTRUOS CON LOS QUE PIERDES EL OBJETO ESPECIFICO: " + tipo);
         boolean tipoencontrado;   
         for(Monster monstruo : monstruos){
-            tipoencontrado = monstruo.getBadConsequence().getSpecificHidden().contains(tipo) ||
-                             monstruo.getBadConsequence().getSpecificVisible().contains(tipo);
+            tipoencontrado = monstruo.getBadConsequence().getSpecificHiddenTreasures().contains(tipo) ||
+                             monstruo.getBadConsequence().getSpecificVisibleTreasures().contains(tipo);
             if(tipoencontrado)
                 System.out.println(monstruo.toString());
         }
@@ -110,7 +110,7 @@ public class Napakalaki {
         
         //monstruos[4] = El gorron en el umbral
         badConsequence = new BadConsequence("Pierdes todos tus tesoros visibles",
-                0,10,0);
+                0,BadConsequence.MAXTREASURES,0);
         prize = new Prize(1, 3);
         monstruos.add(new Monster("El gorron en el umbral", 10, badConsequence, prize));
         
@@ -243,9 +243,11 @@ public class Napakalaki {
 /*      TreasureKind type = TreasureKind.ARMOR;
        ConsultaTipoConcreto(monstruos,type);
 */     
-       // Para mostrar un monstruo
+       // Para mostrar todos los monstruos
+/*        
         for(Monster monstruo : monstruos){
             System.out.println(monstruo.toString());
         }
+*/
     }
 }
