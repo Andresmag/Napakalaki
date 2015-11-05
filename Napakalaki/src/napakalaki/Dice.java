@@ -22,4 +22,9 @@ public class Dice {
         return 0;
     }
     
+    @Override
+    public String toString(){
+        String resp = "Numero obtenido: " + instance;
+        return resp;
+    }
 }
