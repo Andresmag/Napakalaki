@@ -18,6 +18,11 @@ import java.util.ArrayList;
 public class Napakalaki {
     
     private static final Napakalaki instance = null;
+    private Monster currentMonster;
+    private CardDealer dealer;
+    private Player currentPlayer;
+    private ArrayList<Player> players;
+    
     
     //Constructor privado. (Quizás haya que modificarlo)
     private Napakalaki(){ }
@@ -58,7 +63,7 @@ public class Napakalaki {
         //POR IMPLEMENTAR
     }   
     
-    public makeTreasuresVisible(ArrayList<Treasure> treasures){
+    public void makeTreasuresVisible(ArrayList<Treasure> treasures){
          //POR IMPLEMENTAR
      }
      
