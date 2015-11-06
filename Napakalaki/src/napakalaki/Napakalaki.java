@@ -17,11 +17,11 @@ import java.util.ArrayList;
 
 public class Napakalaki {
     
-    private static final Napakalaki instance = null;
+    private static Napakalaki instance = null;
     private Monster currentMonster;
     private CardDealer dealer;
     private Player currentPlayer;
-    private ArrayList<Player> players;
+    private ArrayList<Player> players = new ArrayList();
     
     
     //Constructor privado. (Quizás haya que modificarlo)

@@ -37,6 +37,14 @@ public class Monster {
         return bc;
     }
     
+    public int getLevelsGained(){
+        return price.getLevel();
+    }
+    
+    public int getTreasuresGained(){
+        return price.getTreasures();
+    }
+    
     //Constructor
     public Monster(String newName, int level, BadConsequence newBC, Prize newPrice){
         name = newName;

@@ -13,11 +13,11 @@ import java.util.ArrayList;
  */
 public class CardDealer {
     
-    private static final CardDealer instance = null;
-    ArrayList<Monster> unusedMonsters = new ArrayList <> ();
-    ArrayList<Monster> usedMonsters = new ArrayList <> ();
-    ArrayList<Treasure> unusedTreasures = new ArrayList <> ();
-    ArrayList<Treasure> usedTreasures = new ArrayList <> ();
+    private static CardDealer instance = null;
+    private ArrayList<Monster> unusedMonsters = new ArrayList();
+    private ArrayList<Monster> usedMonsters = new ArrayList();
+    private ArrayList<Treasure> unusedTreasures = new ArrayList();
+    private ArrayList<Treasure> usedTreasures = new ArrayList();
     
     //Constructor privado. (Quizás haya que modificarlo)
     private CardDealer(){}
@@ -38,7 +38,7 @@ public class CardDealer {
         //FALTA POR IMPLEMENTAR
     }
     
-    public CardDealer getInstance(){
+    public static CardDealer getInstance(){
         return instance;
     }
     

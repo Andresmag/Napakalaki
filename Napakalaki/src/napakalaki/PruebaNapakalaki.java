@@ -248,6 +248,12 @@ public class PruebaNapakalaki {
         for(Monster monstruo : monstruos){
             System.out.println(monstruo.toString());
         }
+        
+        //Prueba del metodo Treasure
+
+        Treasure t;
+        t = new Treasure("Espada mata Algebros", 5, TreasureKind.BOTHHANDS);
+        System.out.println(t.toString());
 */
     }
 }
