@@ -28,11 +28,7 @@ public class Monster {
     public int getCombatLevel(){
         return combatLevel;
     }
-    
-    public Prize getPrize (){
-        return price;
-    }
-    
+
     public BadConsequence getBadConsequence (){
         return bc;
     }
