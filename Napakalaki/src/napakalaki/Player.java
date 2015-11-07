@@ -24,7 +24,10 @@ class Player {
     private ArrayList<Treasure> visibleTreasures = new ArrayList();
    
     //Métodos
-    public Player(String name){ }
+    public Player(String newName){ 
+        name = newName;
+        level = 1;
+    }
     
     public String getName(){
         return name;
@@ -35,7 +38,12 @@ class Player {
     }
     
     private int getCombatLevel(){
-        return level;   //falta mas
+        int combatLevel = level;
+        for(Treasure visibleTreasures : visibleTreasures){
+            combatLevel += visibleTreasures.getBonus();
+        }
+        //Supongo que los ocultos no cuenta
+        return combatLevel;   //falta mas
     }
     
     private void incrementLevels(int i){
@@ -44,6 +52,9 @@ class Player {
     
     private void decrementLevels(int i){
         level -= i;
+        
+        if(level < 1)
+            level = 1;
     }
     
     private void setPendingBadConsequence(BadConsequence b){
@@ -81,7 +92,8 @@ class Player {
     }
     
     private void dielfNoTreasures(){
-        //IMPLEMENTAR
+        if(visibleTreasures.isEmpty() && hiddenTreasures.isEmpty())
+            dead = true;
     }
     
     public boolean isDead(){
@@ -117,8 +129,10 @@ class Player {
     }
     
     public boolean validState(){
-        //IMPLEMENTAR
-        return false;
+        boolean validState = false;
+        if(pendingBadConsequence.isEmpty() && getHiddenTreasures().size() < 5)
+            validState = true;
+        return validState;
     }
     
     public void initTreasures(){
@@ -144,17 +158,19 @@ class Player {
     }
     
     public boolean canISteal(){
-        //IMPLEMENTAR
-        return false;
+        return canISteal;
     }
     
     private boolean canYouGiveMeATreasure(){
-        //IMPLEMENTAR
-        return false;
+        boolean canSteal = false;
+        if(enemy.getVisibleTreasures().size() > 0 || 
+                enemy.getHiddenTreasures().size() >0)
+                    canSteal = true;
+        return canSteal;
     }
     
     private void haveStolen(){
-        //IMPLEMENTAR
+        canISteal = false;
     }
     
     public void dicardAllTreasures(){

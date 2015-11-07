@@ -10,16 +10,19 @@ package napakalaki;
  * @author Alejandro
  */
 public class Dice {
-    private static final Dice instance = null;
+    private static Dice instance = null;
     
     private Dice (){ }
     
-    public static Dice getInstance() {
-        return instance;
+    public static Dice getInstance(){
+        if(instance == null)
+            instance = new Dice();
+        return instance;   
     }
     
     public int nextNumber(){
-        return 0;
+        int number = (int) Math.floor(Math.random()*6+1);
+        return number;
     }
     
     @Override
