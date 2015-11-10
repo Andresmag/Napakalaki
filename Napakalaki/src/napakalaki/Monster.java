@@ -53,7 +53,7 @@ public class Monster {
     @Override
     public String toString(){
         String resp = "\nNombre: " + name + "\t  Nivel: " +Integer.toString(combatLevel);
-        resp +=  price.toString();
+        resp +=  "\nNiveles que ganas: " + this.getLevelsGained() + "\tTesoros que ganas: " + this.getTreasuresGained();
         resp += "\nMal rollo: " + bc.toString();
         return resp;
     }

@@ -45,7 +45,7 @@ public class PruebaNapakalaki {
     public static void ConsultaGananciaNivel (ArrayList<Monster> monstruos, int cantidadminima){
         System.out.println("MONSTRUOS CON LOS QUE GANAS MAS DE UN NIVEL:");
          for(Monster monstruo : monstruos)
-            if(monstruo.getPrize().getLevel() > cantidadminima)
+            if(monstruo.getLevelsGained() > cantidadminima)
                 System.out.println(monstruo.toString());   
     }
     
