@@ -7,27 +7,30 @@ package napakalaki;
 
 /**
  *
- * @author Alejandro
+ * @author Lenovo
  */
 public class Dice {
-    private static Dice instance = null;
     
-    private Dice (){ }
-    
-    public static Dice getInstance(){
-        if(instance == null)
-            instance = new Dice();
-        return instance;   
+    private Dice() {
     }
     
-    public int nextNumber(){
-        int number = (int) Math.floor(Math.random()*6+1);
+    public static Dice getInstance() {
+        return DiceHolder.INSTANCE;
+    }
+    
+    private static class DiceHolder {
+
+        private static final Dice INSTANCE = new Dice();
+    }
+    
+      public int nextNumber(){
+        int number = (int) (Math.random()*6+1);
         return number;
     }
     
     @Override
     public String toString(){
-        String resp = "Numero obtenido: " + instance;
+        String resp = "Numero obtenido: " + nextNumber();
         return resp;
     }
 }

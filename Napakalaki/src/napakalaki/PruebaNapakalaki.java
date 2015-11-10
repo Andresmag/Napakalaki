@@ -93,5 +93,7 @@ public class PruebaNapakalaki {
         t = new Treasure("Espada mata Algebros", 5, TreasureKind.BOTHHANDS);
         System.out.println(t.toString());
 */
+        Dice dice = Dice.getInstance();
+        System.out.println(dice.toString());
     }
 }
