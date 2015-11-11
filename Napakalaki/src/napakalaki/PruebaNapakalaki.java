@@ -95,5 +95,11 @@ public class PruebaNapakalaki {
 */
         Dice dice = Dice.getInstance();
         System.out.println(dice.toString());
+        
+        CardDealer carddealer = CardDealer.getInstance();
+        carddealer.initCards();
+        System.out.println(carddealer.nextMonster());
+        System.out.println(carddealer.nextTreasure());
+        System.out.println(carddealer.nextMonster());
     }
 }

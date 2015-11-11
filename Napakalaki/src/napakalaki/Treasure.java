@@ -34,7 +34,7 @@ public class Treasure {
     
     @Override
     public String toString(){
-        String resp = "Nombre del tesoro: " + name + "\nTipo de tesoro: " + type +
+        String resp = "\nNombre del tesoro: " + name + "\nTipo de tesoro: " + type +
                 "\nBonificacion otorgada: " + bonus;
         
         return resp;

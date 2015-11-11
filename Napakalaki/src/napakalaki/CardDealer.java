@@ -59,6 +59,8 @@ public class CardDealer {
         unusedTreasures.add(new Treasure("Varita de atizamiento", 3, TreasureKind.ONEHAND));
         unusedTreasures.add(new Treasure("Tentaculo de pega", 2, TreasureKind.HELMET));
         unusedTreasures.add(new Treasure("Zapato deja-amigos", 1, TreasureKind.SHOES));
+        
+         shuffleTreasures();    //Los barajamos una vez introducidos
     }
  
     private void initMonsterCardDeck(){
@@ -216,11 +218,13 @@ public class CardDealer {
         
         //monstruos[18] = Bicefalo //REVISAR
         badConsequence = new BadConsequence("Te faltan manos para tanta cabeza. Pierdes 3 niveles y tus tesoros visibles de las manos",
-                0,
+                3,
                 new ArrayList(Arrays.asList(TreasureKind.ONEHAND, TreasureKind.ONEHAND, TreasureKind.BOTHHANDS)), 
                 new ArrayList());
         prize = new Prize(1, 1);
         unusedMonsters.add(new Monster("Bicefalo", 20, badConsequence, prize));
+        
+        shuffleMonsters(); //Los barajamos una vez incluidos
     }
     
     private void shuffleTreasures(){

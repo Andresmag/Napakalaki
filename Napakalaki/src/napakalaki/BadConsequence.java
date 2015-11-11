@@ -120,28 +120,32 @@ public class BadConsequence {
         String resp = text; 
         if(death)
             resp+= "\nEstas muerto";
-        else
+        
+        else{
             if(levels != 0)
                 resp+= "\nNiveles que pierdes: " + Integer.toString(levels);
             
-            if(nVisibleTreasures != 0 || nHiddenTreasures != 0)
+            if(nVisibleTreasures != 0 || nHiddenTreasures != 0){
                 resp += "\nTesoros perdidos: ";
                 if(nVisibleTreasures != 0)
                     resp += "\n\t -> Visibles = " + Integer.toString(nVisibleTreasures);
+                
                 if(nHiddenTreasures != 0)
                     resp += "\n\t -> Ocultos = " + Integer.toString(nHiddenTreasures);
+            }
             
-            if(specificVisibleTreasures.isEmpty() || specificHiddenTreasures.isEmpty())
+            if(!specificVisibleTreasures.isEmpty() || !specificHiddenTreasures.isEmpty()){
                 resp += "\nTesoros especificos perdidos:";
                 String borraCorchetesOculto = specificHiddenTreasures.toString();
                 String borraCorchetesVisible = specificVisibleTreasures.toString();
                 
-                if(specificVisibleTreasures.isEmpty()) 
-                    
+                if(!specificVisibleTreasures.isEmpty())
                     resp += "\n\t -> Visibles : " + borraCorchetesVisible.substring(1, borraCorchetesVisible.length()-1);
-                if(specificHiddenTreasures.isEmpty() )
-                    
+                
+                if(!specificHiddenTreasures.isEmpty() )
                     resp += "\n\t -> Ocultos : " + borraCorchetesOculto.substring(1, borraCorchetesOculto.length()-1);
+            }
+        }
         
         return resp;
     }
