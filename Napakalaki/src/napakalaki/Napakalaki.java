@@ -29,6 +29,9 @@ public class Napakalaki {
     
  
     public static Napakalaki getInstance(){
+        if(instance == null)
+            instance = new Napakalaki();
+        
         return instance;
     }
     

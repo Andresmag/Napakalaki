@@ -11,19 +11,20 @@ package napakalaki;
  */
 public class Dice {
     
-    private Dice() {
+    private static Dice instance = null;
+    
+    private Dice(){
     }
     
-    public static Dice getInstance() {
-        return DiceHolder.INSTANCE;
+    public static Dice getInstance(){
+        if(instance == null){
+            instance = new Dice();
+        }
+        
+        return instance;
     }
     
-    private static class DiceHolder {
-
-        private static final Dice INSTANCE = new Dice();
-    }
-    
-      public int nextNumber(){
+    public int nextNumber(){
         int number = (int) (Math.random()*6+1);
         return number;
     }
