@@ -91,7 +91,7 @@ class Player {
         return contador;    //Supongo que es asi
     }
     
-    private void dielfNoTreasures(){
+    private void dieIfNoTreasures(){
         if(visibleTreasures.isEmpty() && hiddenTreasures.isEmpty())
             dead = true;
     }
