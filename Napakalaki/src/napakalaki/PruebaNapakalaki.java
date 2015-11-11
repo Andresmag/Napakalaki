@@ -6,7 +6,6 @@
 package napakalaki;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  *
@@ -95,7 +94,7 @@ public class PruebaNapakalaki {
 */
         Dice dice = Dice.getInstance();
         System.out.println(dice.toString());
-        
+       
         CardDealer carddealer = CardDealer.getInstance();
         carddealer.initCards();
         System.out.println(carddealer.nextMonster());
