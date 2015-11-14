@@ -36,11 +36,15 @@ public class Napakalaki {
     }
     
     private void initPlayers (ArrayList<String> names){
-        //POR IMPLEMENTAR
-    }
+        if(!names.isEmpty() )
+            for (String name : names) {
+                Player nuevoPlayer = new Player(name);
+                players.add(nuevoPlayer);
+            }
+    } 
     
     private Player nextPlayer(){
-        //POR IMPLEMENTAR
+        if(current) //EN PROCESO
         return null;
     }
     
