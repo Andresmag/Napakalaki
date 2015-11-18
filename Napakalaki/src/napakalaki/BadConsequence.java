@@ -58,7 +58,8 @@ public class BadConsequence {
         specificHiddenTreasures = tHidden;
         
         nVisibleTreasures = 0;
-        nHiddenTreasures = 0;        
+        nHiddenTreasures = 0;
+        death = false;
     }    
     
     //Consultores
