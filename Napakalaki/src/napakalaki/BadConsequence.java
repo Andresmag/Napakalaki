@@ -100,11 +100,8 @@ public class BadConsequence {
     }
     
     public boolean isEmpty(){
-        boolean esta_vacia = false;
-        if(nHiddenTreasures == 0 && nVisibleTreasures == 0 &&
-                specificHiddenTreasures.isEmpty() && specificVisibleTreasures.isEmpty())
-            esta_vacia = true;
-        
+        boolean esta_vacia = ( nHiddenTreasures == 0 && nVisibleTreasures == 0 &&
+                specificHiddenTreasures.isEmpty() && specificVisibleTreasures.isEmpty() );        
         return esta_vacia;
     }
 

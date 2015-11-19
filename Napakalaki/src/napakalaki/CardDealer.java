@@ -16,13 +16,18 @@ import java.util.Collections;
 public class CardDealer {
     
     private static CardDealer instance = null;
-    private ArrayList<Monster> unusedMonsters = new ArrayList();
-    private ArrayList<Monster> usedMonsters = new ArrayList();
-    private ArrayList<Treasure> unusedTreasures = new ArrayList();
-    private ArrayList<Treasure> usedTreasures = new ArrayList();
+    private ArrayList<Monster> unusedMonsters;
+    private ArrayList<Monster> usedMonsters;
+    private ArrayList<Treasure> unusedTreasures;
+    private ArrayList<Treasure> usedTreasures;
     
-    //Constructor privado. (Quizás haya que modificarlo)
-    private CardDealer(){}
+    //Constructor privado.
+    private CardDealer(){
+        unusedMonsters = new ArrayList();
+        usedMonsters = new ArrayList();
+        unusedTreasures = new ArrayList();
+        usedTreasures = new ArrayList();    
+    }
     
     private void initTreasureCardDeck(){
         //Como los Arrays ya estan inicializados, introducimos las cartas
@@ -69,9 +74,7 @@ public class CardDealer {
         
         BadConsequence badConsequence;
         Prize prize;
-        
-        //Monstruos
-        
+
         //monstruos[0] = 3 Byakhees de bonanza
         badConsequence = new BadConsequence("Pierdes tu armadura visible y otra oculta",
                 0,
@@ -79,7 +82,6 @@ public class CardDealer {
                 new ArrayList(Arrays.asList(TreasureKind.ARMOR)));
         prize = new Prize(1, 2);
         unusedMonsters.add(new Monster("3 Byakhees de bonanza", 8, badConsequence, prize));
-        
         
         //monstruos[1] = Chibithulhu
         badConsequence = new BadConsequence("Embobados con el lindo primigenio te descartas de tu casco visible",
@@ -89,7 +91,6 @@ public class CardDealer {
         prize = new Prize(1, 1);
         unusedMonsters.add(new Monster("Chibithulhu" , 2, badConsequence, prize));
         
-        
         //monstruos[2] = El sopor de Dunwich
         badConsequence = new BadConsequence("El primordial bostezo contagioso. Pierdes el calzado visible",
                 0,
@@ -98,7 +99,6 @@ public class CardDealer {
         prize = new Prize(1, 1);
         unusedMonsters.add(new Monster("El sopor de Dunwich", 2, badConsequence, prize));
         
-        
         //monstruos[3] = Angeles de la noche ibicenca
         badConsequence = new BadConsequence("Te atrapan para llevarte de fiesta y te dejan caer en mitad del vuelo. Decarta 1 mano visible y 1 mano oculta",
                 0,
@@ -106,7 +106,6 @@ public class CardDealer {
                 new ArrayList(Arrays.asList(TreasureKind.ONEHAND)));
         prize = new Prize(1, 4);
         unusedMonsters.add(new Monster("Angeles de la noche ibicenca", 14, badConsequence, prize));
-        
         
         //monstruos[4] = El gorron en el umbral
         badConsequence = new BadConsequence("Pierdes todos tus tesoros visibles",

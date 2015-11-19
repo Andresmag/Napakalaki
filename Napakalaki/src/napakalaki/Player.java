@@ -94,8 +94,7 @@ class Player {
     }
     
     private void dieIfNoTreasures(){
-        if(visibleTreasures.isEmpty() && hiddenTreasures.isEmpty())
-            dead = true;
+            dead = visibleTreasures.isEmpty() && hiddenTreasures.isEmpty();
     }
     
     public boolean isDead(){
@@ -131,9 +130,8 @@ class Player {
     }
     
     public boolean validState(){
-        boolean validState = false;
-        if(pendingBadConsequence.isEmpty() && getHiddenTreasures().size() < 5)
-            validState = true;
+        boolean validState = pendingBadConsequence.isEmpty() && 
+                             getHiddenTreasures().size() < 5 ;
         return validState;
     }
     
