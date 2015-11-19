@@ -50,7 +50,7 @@ public class Napakalaki {
     
     private Player nextPlayer(){
         if(currentPlayer == null){
-            int numAleatorio = (int) (Math.random()* players.size() + 1);
+            int numAleatorio = (int) (Math.random()* players.size() );
             currentPlayer = players.get(numAleatorio);        
         }else{
             int num = players.indexOf(currentPlayer);
@@ -106,13 +106,11 @@ public class Napakalaki {
     }
     
     public Player getCurrentPlayer(){
-        //POR IMPLEMENTAR
-        return null;
+        return currentPlayer;
     }
     
     public Monster getCurrentMonster(){
-        //POR IMPLEMENTAR
-        return null; 
+        return currentMonster; 
     }
     
     public boolean nextTurn() {
@@ -121,8 +119,7 @@ public class Napakalaki {
     }
     
     public boolean endOfGame(CombatResult result){
-        //POR IMPLEMENTAR
-        return false;
+        return result.equals(CombatResult.WINGAME);
     }
      
 }

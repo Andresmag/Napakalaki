@@ -49,11 +49,10 @@ public class Monster {
         price = newPrice;
     }
     
-    //Implementación del método toString  (Por resvisar[Algebro])
     @Override
     public String toString(){
         String resp = "\nNombre: " + name + "\t  Nivel: " +Integer.toString(combatLevel);
-        resp +=  "\nNiveles que ganas: " + this.getLevelsGained() + "\tTesoros que ganas: " + this.getTreasuresGained();
+        resp +=  "\nNiveles que ganas: " + getLevelsGained() + "\tTesoros que ganas: " + getTreasuresGained();
         resp += "\nMal rollo: " + bc.toString();
         return resp;
     }

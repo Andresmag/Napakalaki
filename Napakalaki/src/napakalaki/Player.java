@@ -78,8 +78,44 @@ class Player {
     }
     
     private boolean canMakeTreasureVisible(Treasure t){
-        //IMPLEMENTAR
-        return false;
+        boolean puedeEquipar = true;
+        TreasureKind tipoObjeto = t.getType();
+      
+        switch (tipoObjeto){
+            case BOTHHANDS :
+                int h=0, btam = visibleTreasures.size();
+                Treasure btes;
+                while(h< btam && puedeEquipar){
+                    btes = visibleTreasures.get(h);
+                    puedeEquipar = !( btes.getType() == tipoObjeto || btes.getType() == TreasureKind.ONEHAND );
+                    h++;
+                }
+            break;
+            case ONEHAND :
+              int una_mano = 0;  //Contador para ver cuantos tesoros OneHand lleva equipados
+              int i=0, tam = visibleTreasures.size();
+              Treasure tes;
+              while(i< tam && puedeEquipar){
+                    tes = visibleTreasures.get(i);
+                    puedeEquipar = !(tes.getType() == TreasureKind.BOTHHANDS);
+                    if(puedeEquipar && tes.getType() == TreasureKind.ONEHAND){
+                        una_mano++;
+                        puedeEquipar = (una_mano < 2);
+                    }
+                    i++;
+              }
+            break;
+            default:
+                int j=0, dtam = visibleTreasures.size();
+                Treasure dtes;
+                while(j< dtam && puedeEquipar){
+                    dtes = visibleTreasures.get(j);
+                    puedeEquipar = !(dtes.getType() == tipoObjeto);
+                    j++;
+                }
+            break;
+        }
+        return puedeEquipar;
     }
     
     private int howManyVisibleTreasures(TreasureKind tKind){
@@ -153,8 +189,8 @@ class Player {
     }
     
     private Treasure giveMeATreasure(){
-        //Implementar
-        return null;
+        int posAleatoria = (int) (Math.random()* hiddenTreasures.size() );
+        return hiddenTreasures.get(posAleatoria);
     }
     
     public boolean canISteal(){
