@@ -33,9 +33,11 @@ class Player {
         return name;
     }
     
+    
     private void bringToLife(){
         dead = false;   //Supongo que esto es traer a la vida
     }
+    
     
     private int getCombatLevel(){
         int combatLevel = level;

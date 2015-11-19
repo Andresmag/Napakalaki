@@ -17,15 +17,20 @@ import java.util.ArrayList;
 
 public class Napakalaki {
     
-    private static Napakalaki instance = null;
+    private static Napakalaki instance;
     private Monster currentMonster;
     private CardDealer dealer;
-    private Player currentPlayer = null;
-    private ArrayList<Player> players = new ArrayList();
+    private Player currentPlayer;
+    private ArrayList<Player> players;
     
     
     //Constructor privado. (Quizás haya que modificarlo)
-    private Napakalaki(){ }
+    private Napakalaki(){
+        currentMonster = null;
+        dealer = null;
+        currentPlayer = null; 
+        players = new ArrayList<>();
+    }
     
  
     public static Napakalaki getInstance(){
@@ -48,10 +53,7 @@ public class Napakalaki {
             int numAleatorio = (int) (Math.random()* players.size() + 1);
             currentPlayer = players.get(numAleatorio);        
         }else{
-            int num = 0;
-            while (players.get(num) != currentPlayer)
-              num += 1;
-            
+            int num = players.indexOf(currentPlayer);
             if(num == players.size()-1)
               currentPlayer = players.get(0);
             else
@@ -65,30 +67,21 @@ public class Napakalaki {
     }
     
     private void setEnemies(){
-        final int maximasReiteraciones = 10;    //Maximo de reiteraciones erroneas.
-        boolean asignando = true;
-        while(asignando){
-            ArrayList<Integer> numeros = new ArrayList <> ();   //lista que contendrá el 'numero de cada jugador'
-            for(int i=0; i< players.size(); i++)
-                numeros.add(i);
-            int iterador = 0;
-            int reiterador = 0;
-            while(reiterador < maximasReiteraciones ||  iterador < players.size()){
-                int numeroAleatorio;
-                    numeroAleatorio = (int) (Math.random()* numeros.size() + 1); //Genero un numero aleatorio para la posicion en el vector
-                    Player jugadorActual = players.get(iterador);
-                    Player elegido = players.get(numeros.get(numeroAleatorio)); //El jugador con el 'numero' igual a dicha posicion de la lista de numeros
-                if(elegido == jugadorActual)  //Es él mismo.
-                    reiterador++;
-                else{       //No es él mismo.
-                    jugadorActual.setEnemy(elegido);    //Asigno al enemigo
-                    numeros.remove(numeroAleatorio);    //Elimino el que está en la posicion 'numeroAleatorio'
-                    iterador++;                 //Indico que pase al siguiente jugador.
-                    reiterador = 0;             //Reinicio el contador de elecciones erróneas
-                } 
-            }
-            asignando = reiterador < maximasReiteraciones;  //NO hemos superado el maximo (hemos asignado todos correctamente)
+        int iterador = 0;
+        int tam = players.size();
+        int numeroAleatorio;
+        Player jugadorActual;
+        Player elegido;
+        while(iterador < tam){
+            numeroAleatorio = (int) (Math.random()* tam ); //Genero un numero aleatorio para la posicion en el vector
+            jugadorActual = players.get(iterador);
+            elegido = players.get(numeroAleatorio); //Se elige un jugador aleatorio
+            if(elegido != jugadorActual){  //No es él mismo.
+                jugadorActual.setEnemy(elegido);    //Asigno al enemigo
+                iterador++;                 //Indico que pase al siguiente jugador.
+            } 
         }
+        
     }
     
     public CombatResult developCombat (){
@@ -109,7 +102,7 @@ public class Napakalaki {
      }
      
     public void initGame(ArrayList<String> players){
-        //POR IMPLEMENTAR
+        //POR IMPLEMENTAR 
     }
     
     public Player getCurrentPlayer(){
