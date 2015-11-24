@@ -102,7 +102,10 @@ public class Napakalaki {
      }
      
     public void initGame(ArrayList<String> players){
-        //POR IMPLEMENTAR 
+         initPlayers(players);
+         setEnemies();
+         CardDealer.getInstance().initCards();
+         nextTurn();
     }
     
     public Player getCurrentPlayer(){

@@ -92,10 +92,16 @@ public class BadConsequence {
     }
     
    public void substractVisibleTreasure(Treasure t){
-        specificVisibleTreasures.remove(t.getType());
+     if(nVisibleTreasures > 0)
+        nVisibleTreasures -= 1;
+     else
+        specificVisibleTreasures.remove(t.getType() );
     }
     
     public void substractHiddenTreasure(Treasure t){
+     if(nHiddenTreasures > 0)
+        nHiddenTreasures -= 1;
+     else
         specificHiddenTreasures.remove(t.getType());
     }
     
