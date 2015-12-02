@@ -243,9 +243,8 @@ public class CardDealer {
     public Treasure nextTreasure(){
         if(unusedTreasures.isEmpty()){
             //Lo volvemos a rellenar
-            for(Treasure usedTreasure : usedTreasures){
+            for(Treasure usedTreasure : usedTreasures)
                 unusedTreasures.add(usedTreasure);
-            }
             
             //Lo volvemos a barajar
             shuffleTreasures();
@@ -269,9 +268,9 @@ public class CardDealer {
     public Monster nextMonster (){
         if(unusedMonsters.isEmpty()){
             //Lo volvemos a rellenar
-            for(Monster usedMonster : usedMonsters){
+            for(Monster usedMonster : usedMonsters)
                 unusedMonsters.add(usedMonster);
-            }
+            
             
             //Lo volvemos a barajar
             shuffleMonsters();

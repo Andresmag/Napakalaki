@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Alejandro
  * @author Andresmag
  */
-class Player {
+public class Player {
     final static int MAXLEVEL = 10;
     private String name;
     private int level;
@@ -27,6 +27,8 @@ class Player {
     public Player(String newName){ 
         name = newName;
         level = 1;
+        enemy = null;
+        pendingBadConsequence = null;
     }
     
     public String getName(){
@@ -44,8 +46,7 @@ class Player {
         for(Treasure visibleTreasures : visibleTreasures){
             combatLevel += visibleTreasures.getBonus();
         }
-        //Supongo que los ocultos no cuenta
-        return combatLevel;   //falta mas
+        return combatLevel;
     }
     
     private void incrementLevels(int i){
@@ -65,16 +66,21 @@ class Player {
     
     private void applyPrize(Monster m){
         incrementLevels(m.getLevelsGained());
-        //Falta la parte de los tesoros
+        int nTreasures = m.getTreasuresGained();
+        if (nTreasures > 0){
+            CardDealer dealer = CardDealer.getInstance();
+            for(int i=0; i< nTreasures; i++)
+                hiddenTreasures.add(dealer.nextTreasure());
+        }
+            
     }
     
     private void applyBadConsequence(Monster m){
-        if(m.getBadConsequence().getDeath())
-            dead = true;
-        else{
-            decrementLevels(m.getBadConsequence().getLevels());
-        //Falta la parte de los tesoros
-        }
+         BadConsequence badConsequence = m.getBadConsequence();
+         int nLevels = badConsequence.getLevels();
+         decrementLevels(nLevels);
+         BadConsequence pendingBad = badConsequence.adjustToFitTreasureLists(visibleTreasures, hiddenTreasures);
+         setPendingBadConsequence(pendingBad);
     }
     
     private boolean canMakeTreasureVisible(Treasure t){
@@ -146,8 +152,20 @@ class Player {
     }
     
     public CombatResult combat(Monster m){
-        //IMPLEMENTAR
-        return null;
+        CombatResult result;
+        System.out.printf("\nHAY COMBATE\n");
+        if (getCombatLevel() > m.getCombatLevel() ){
+            applyPrize(m);
+            if(level >= MAXLEVEL)
+                result = CombatResult.WINGAME;
+            else
+                result = CombatResult.WIN;
+        }
+        else{
+            applyBadConsequence(m);
+            result = CombatResult.LOSE;
+        }
+        return result;
     }
     
     public void makeTreasureVisible(Treasure t){
@@ -158,21 +176,51 @@ class Player {
     }
     
     public void discardVisibleTreasure(Treasure t){
-        visibleTreasures.remove(t);
+       visibleTreasures.remove(t);
+       if( pendingBadConsequence!=null && !pendingBadConsequence.isEmpty() )
+           pendingBadConsequence.substractVisibleTreasure(t);
+       dieIfNoTreasures();
     }
     
     public void discardHiddenTreasure(Treasure t){
-        hiddenTreasures.remove(t);
+       hiddenTreasures.remove(t);
+       if( pendingBadConsequence!=null && !pendingBadConsequence.isEmpty() )
+           pendingBadConsequence.substractHiddenTreasure(t);
+       dieIfNoTreasures();        
     }
     
     public boolean validState(){
-        boolean validState = pendingBadConsequence.isEmpty() && 
-                             getHiddenTreasures().size() < 5 ;
+        boolean validState = pendingBadConsequence==null;    //Si es nulo, es el primero turno.
+        if(!validState)
+            validState = pendingBadConsequence.isEmpty() && getHiddenTreasures().size() < 5 ;
+
+        if(validState)
+            System.out.println("\nESTADO VÁLIDO\n");
+        else
+            System.out.println("\nESTADO INVÁLIDO\n");
         return validState;
     }
     
     public void initTreasures(){
-        //IMPLEMENTAR
+        CardDealer dealer = CardDealer.getInstance();
+        Dice dice = Dice.getInstance();
+        bringToLife();
+        int diceNumber = dice.nextNumber();
+        System.out.println("\nTIRADA DE DADO : " + diceNumber + "\n");
+        switch(diceNumber){
+            case 1:
+                   hiddenTreasures.add(dealer.nextTreasure());
+            break;
+            case 6:
+                   hiddenTreasures.add(dealer.nextTreasure());
+                   hiddenTreasures.add(dealer.nextTreasure());
+                   hiddenTreasures.add(dealer.nextTreasure());
+            break;
+            default:
+                   hiddenTreasures.add(dealer.nextTreasure());
+                   hiddenTreasures.add(dealer.nextTreasure());
+            break;
+        }
     }
     
     public int getLevels(){
@@ -180,8 +228,14 @@ class Player {
     }
     
     public Treasure stealTreasure(){
-        //IMPLEMENTAR
-        return null;
+        Treasure treasure = null;
+        if(canISteal())
+            if(enemy.canYouGiveMeATreasure()){
+                treasure = enemy.giveMeATreasure();
+                hiddenTreasures.add(treasure);
+                haveStolen();
+            }
+        return treasure;
     }
     
     public void setEnemy(Player newEnemy){
@@ -190,7 +244,9 @@ class Player {
     
     private Treasure giveMeATreasure(){
         int posAleatoria = (int) (Math.random()* hiddenTreasures.size() );
-        return hiddenTreasures.get(posAleatoria);
+        Treasure lostTreasure =hiddenTreasures.get(posAleatoria);
+        hiddenTreasures.remove(lostTreasure);
+        return lostTreasure;
     }
     
     public boolean canISteal(){
@@ -198,19 +254,35 @@ class Player {
     }
     
     private boolean canYouGiveMeATreasure(){
-        boolean canSteal = false;
-        if(enemy.getVisibleTreasures().size() > 0 || 
-                enemy.getHiddenTreasures().size() >0)
-                    canSteal = true;
-        return canSteal;
+        return (!hiddenTreasures.isEmpty());
     }
     
     private void haveStolen(){
         canISteal = false;
     }
     
-    public void dicardAllTreasures(){
-        visibleTreasures.clear();
-        hiddenTreasures.clear();
+    public void discardAllTreasures(){
+        ArrayList<Treasure> copiaVisible = new ArrayList<>(visibleTreasures);
+        ArrayList<Treasure> copiaHidden = new ArrayList<> (hiddenTreasures);
+        
+        for(Treasure treasure : copiaVisible)
+            discardVisibleTreasure(treasure);
+        for(Treasure treasure : copiaHidden)
+            discardHiddenTreasure(treasure);
+       
+    }
+    
+    @Override
+    public String toString (){
+        String resp = "\nNOMBRE : " + name + "\n" +
+                    "Nivel :\t" + level + "\tPoder :\t" + getCombatLevel() + "\n" +
+                    "Enemigo : " + enemy.getName() + "\n" +
+                    "Mal rollo pendiente : \n";
+                    if(pendingBadConsequence == null || pendingBadConsequence.isEmpty())
+                        resp += "-NO HAY-";
+                    else
+                        resp += pendingBadConsequence.toString();
+              
+        return resp;
     }
 }

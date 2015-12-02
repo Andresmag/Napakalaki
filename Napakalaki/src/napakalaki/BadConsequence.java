@@ -111,12 +111,50 @@ public class BadConsequence {
         return esta_vacia;
     }
 
-/*    
+    
     public BadConsequence adjustToFitTreasureLists(ArrayList<Treasure> v , ArrayList<Treasure> h){
-        //FALTA POR IMPLEMENTAR
-        return this;
+        BadConsequence badConse= null;
+        ArrayList<TreasureKind> badSpecificVisible = new ArrayList<> ();
+        ArrayList<TreasureKind> badSpecificHidden = new ArrayList<> ();
+        if(nVisibleTreasures > 0 || nHiddenTreasures > 0){
+            int badvisible=nVisibleTreasures, badhidden=nHiddenTreasures;
+            if(badvisible > v.size())
+                badvisible = v.size();
+            if(badhidden > h.size())
+                badhidden = v.size();
+            badConse = new BadConsequence(getText(),getLevels(),badvisible,badhidden);
+        }
+        else{
+            if(death)
+                badConse = new BadConsequence(getText(), getDeath());
+            else {
+                for(TreasureKind type : specificVisibleTreasures){
+                    Treasure tesv,tesh;
+                    boolean insertadov = false;
+                    boolean insertadoh = false;
+                    int tamv = v.size(), tamh = h.size(), i=0,j=0;
+                    while(i < tamv && !insertadov){
+                        tesv = v.get(i);
+                        insertadov = tesv.getType() == type;
+                        i++;
+                    }
+                    while(j < tamh && !insertadoh){
+                        tesh = h.get(j);
+                        insertadoh = tesh.getType() == type;
+                        j++;
+                    }
+                    if(insertadoh)
+                        badSpecificHidden.add(type);
+                    if(insertadov)
+                        badSpecificVisible.add(type);
+                }
+                    badConse = new BadConsequence(getText(),getLevels(),badSpecificVisible,badSpecificHidden);   
+            }
+             
+        }
+        return badConse;
     }
-*/
+
     
     //Implementacion de la clase toString
     @Override
@@ -124,7 +162,6 @@ public class BadConsequence {
         String resp = text; 
         if(death)
             resp+= "\nEstas muerto";
-        
         else{
             if(levels != 0)
                 resp+= "\nNiveles que pierdes: " + Integer.toString(levels);
