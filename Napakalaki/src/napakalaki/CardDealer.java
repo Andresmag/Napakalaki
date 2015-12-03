@@ -215,7 +215,7 @@ public class CardDealer {
         unusedMonsters.add(new Monster("El Lenguas", 20, badConsequence, prize));
         
         
-        //monstruos[18] = Bicefalo //REVISAR
+        //monstruos[18] = Bicefalo 
         badConsequence = new BadConsequence("Te faltan manos para tanta cabeza. Pierdes 3 niveles y tus tesoros visibles de las manos",
                 3,
                 new ArrayList(Arrays.asList(TreasureKind.ONEHAND, TreasureKind.ONEHAND, TreasureKind.BOTHHANDS)), 
@@ -241,7 +241,9 @@ public class CardDealer {
     }
     
     public Treasure nextTreasure(){
+        Treasure t = null;
         if(unusedTreasures.isEmpty()){
+            if(!usedTreasures.isEmpty()){
             //Lo volvemos a rellenar
             for(Treasure usedTreasure : usedTreasures)
                 unusedTreasures.add(usedTreasure);
@@ -251,17 +253,19 @@ public class CardDealer {
             
             //Limpiamos el mazo de descartes
             usedTreasures.clear();
+            }
+            else
+                System.out.println("No hay cartas tampoco en el mazo de descartes");
+            
         }
         
-        //Cojemos el primero
-        Treasure t = unusedTreasures.get(0);
+        if(!unusedTreasures.isEmpty()){
+            //Cojemos el primero
+            t = unusedTreasures.get(0);
         
-        //Lo añadimos al mazo de descartes para no volver a cogerlo
-        giveTreasureBack(t);
-        
-        //Y lo quitamos del mazo de donde se cogen para evitar repetirlo
-        unusedTreasures.remove(t);
-        
+            //Y lo quitamos del mazo de donde se cogen para evitar repetirlo
+            unusedTreasures.remove(t);
+        }
         return t;
     }
     

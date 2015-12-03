@@ -132,7 +132,7 @@ public class Player {
             }
         }
         
-        return contador;    //Supongo que es asi
+        return contador;    
     }
     
     private void dieIfNoTreasures(){
@@ -179,6 +179,11 @@ public class Player {
        visibleTreasures.remove(t);
        if( pendingBadConsequence!=null && !pendingBadConsequence.isEmpty() )
            pendingBadConsequence.substractVisibleTreasure(t);
+       
+       //Lo pasamos al mazo de descartados (usedTreasures)
+       CardDealer dealer = CardDealer.getInstance();
+       dealer.giveTreasureBack(t);
+       
        dieIfNoTreasures();
     }
     
@@ -186,13 +191,17 @@ public class Player {
        hiddenTreasures.remove(t);
        if( pendingBadConsequence!=null && !pendingBadConsequence.isEmpty() )
            pendingBadConsequence.substractHiddenTreasure(t);
+       
+       //Lo pasamos al mazo de descartados (usedTreasures)
+       CardDealer dealer = CardDealer.getInstance();
+       dealer.giveTreasureBack(t);
+       
        dieIfNoTreasures();        
     }
     
     public boolean validState(){
-        boolean validState = pendingBadConsequence==null;    //Si es nulo, es el primero turno.
-        if(!validState)
-            validState = pendingBadConsequence.isEmpty() && getHiddenTreasures().size() < 5 ;
+        boolean validState = ((pendingBadConsequence==null || pendingBadConsequence.isEmpty()) &&
+                getHiddenTreasures().size() < 5);    
 
         if(validState)
             System.out.println("\nESTADO VÁLIDO\n");
@@ -209,16 +218,31 @@ public class Player {
         System.out.println("\nTIRADA DE DADO : " + diceNumber + "\n");
         switch(diceNumber){
             case 1:
-                   hiddenTreasures.add(dealer.nextTreasure());
+                Treasure t = dealer.nextTreasure();
+                if(t != null)
+                    hiddenTreasures.add(t);
             break;
             case 6:
-                   hiddenTreasures.add(dealer.nextTreasure());
-                   hiddenTreasures.add(dealer.nextTreasure());
-                   hiddenTreasures.add(dealer.nextTreasure());
+                Treasure p = dealer.nextTreasure();
+                if(p != null)
+                   hiddenTreasures.add(p);
+                
+                p = dealer.nextTreasure();
+                if(p != null)
+                   hiddenTreasures.add(p);
+                
+                p = dealer.nextTreasure();
+                if(p != null)
+                   hiddenTreasures.add(p);
             break;
             default:
-                   hiddenTreasures.add(dealer.nextTreasure());
-                   hiddenTreasures.add(dealer.nextTreasure());
+                Treasure j = dealer.nextTreasure();
+                if(j != null)
+                   hiddenTreasures.add(j);
+                
+                j = dealer.nextTreasure();
+                if(j != null)
+                   hiddenTreasures.add(j);
             break;
         }
     }

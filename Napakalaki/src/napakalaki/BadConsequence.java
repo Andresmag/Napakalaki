@@ -43,9 +43,9 @@ public class BadConsequence {
         text = newText;
         death = newDeath;
         
-        levels = 0;
-        nVisibleTreasures = 0;
-        nHiddenTreasures = 0;        
+        levels = Player.MAXLEVEL;
+        nVisibleTreasures = MAXTREASURES;
+        nHiddenTreasures = MAXTREASURES;        
         
     }
     
@@ -125,35 +125,33 @@ public class BadConsequence {
             badConse = new BadConsequence(getText(),getLevels(),badvisible,badhidden);
         }
         else{
-            if(death)
-                badConse = new BadConsequence(getText(), getDeath());
-            else {
-                for(TreasureKind type : specificVisibleTreasures){
-                    Treasure tesv,tesh;
-                    boolean insertadov = false;
-                    boolean insertadoh = false;
-                    int tamv = v.size(), tamh = h.size(), i=0,j=0;
-                    while(i < tamv && !insertadov){
-                        tesv = v.get(i);
-                        insertadov = tesv.getType() == type;
-                        i++;
-                    }
-                    while(j < tamh && !insertadoh){
-                        tesh = h.get(j);
-                        insertadoh = tesh.getType() == type;
-                        j++;
-                    }
-                    if(insertadoh)
-                        badSpecificHidden.add(type);
-                    if(insertadov)
-                        badSpecificVisible.add(type);
+            for(TreasureKind type : specificVisibleTreasures){
+                Treasure tesv,tesh;
+                boolean insertadov = false;
+                boolean insertadoh = false;
+                int tamv = v.size(), tamh = h.size(), i=0,j=0;
+                while(i < tamv && !insertadov){
+                    tesv = v.get(i);
+                    insertadov = tesv.getType() == type;
+                    i++;
                 }
-                    badConse = new BadConsequence(getText(),getLevels(),badSpecificVisible,badSpecificHidden);   
+                while(j < tamh && !insertadoh){
+                    tesh = h.get(j);
+                    insertadoh = tesh.getType() == type;
+                    j++;
+                }
+                if(insertadoh)
+                    badSpecificHidden.add(type);
+                if(insertadov)
+                    badSpecificVisible.add(type);
             }
-             
+            badConse = new BadConsequence(getText(),getLevels(),badSpecificVisible,badSpecificHidden);   
         }
-        return badConse;
+        
+        return badConse;     
     }
+        
+
 
     
     //Implementacion de la clase toString

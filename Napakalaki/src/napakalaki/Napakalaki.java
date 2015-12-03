@@ -13,7 +13,6 @@ import java.util.ArrayList;
  * @author Andresmag
  */
 
-//POR IMPLEMENTAR 
 
 public class Napakalaki {
     
@@ -24,7 +23,7 @@ public class Napakalaki {
     private ArrayList<Player> players;
     
     
-    //Constructor privado. (Quizás haya que modificarlo)
+    //Constructor privado. 
     private Napakalaki(){
         currentMonster = null;
         dealer = CardDealer.getInstance();
