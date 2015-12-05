@@ -69,10 +69,13 @@ public class Player {
         int nTreasures = m.getTreasuresGained();
         if (nTreasures > 0){
             CardDealer dealer = CardDealer.getInstance();
-            for(int i=0; i< nTreasures; i++)
-                hiddenTreasures.add(dealer.nextTreasure());
-        }
-            
+            Treasure treasure = null;
+            for(int i=0; i< nTreasures; i++){
+                treasure = dealer.nextTreasure();
+                if(treasure != null)
+                    hiddenTreasures.add(treasure);    
+            }      
+        }  
     }
     
     private void applyBadConsequence(Monster m){
@@ -98,18 +101,8 @@ public class Player {
                 }
             break;
             case ONEHAND :
-              int una_mano = 0;  //Contador para ver cuantos tesoros OneHand lleva equipados
-              int i=0, tam = visibleTreasures.size();
-              Treasure tes;
-              while(i< tam && puedeEquipar){
-                    tes = visibleTreasures.get(i);
-                    puedeEquipar = !(tes.getType() == TreasureKind.BOTHHANDS);
-                    if(puedeEquipar && tes.getType() == TreasureKind.ONEHAND){
-                        una_mano++;
-                        puedeEquipar = (una_mano < 2);
-                    }
-                    i++;
-              }
+              puedeEquipar = ((howManyVisibleTreasures(tipoObjeto) < 2) && 
+                      (howManyVisibleTreasures(TreasureKind.BOTHHANDS) == 0));
             break;
             default:
                 int j=0, dtam = visibleTreasures.size();
@@ -180,10 +173,6 @@ public class Player {
        if( pendingBadConsequence!=null && !pendingBadConsequence.isEmpty() )
            pendingBadConsequence.substractVisibleTreasure(t);
        
-       //Lo pasamos al mazo de descartados (usedTreasures)
-       CardDealer dealer = CardDealer.getInstance();
-       dealer.giveTreasureBack(t);
-       
        dieIfNoTreasures();
     }
     
@@ -191,10 +180,6 @@ public class Player {
        hiddenTreasures.remove(t);
        if( pendingBadConsequence!=null && !pendingBadConsequence.isEmpty() )
            pendingBadConsequence.substractHiddenTreasure(t);
-       
-       //Lo pasamos al mazo de descartados (usedTreasures)
-       CardDealer dealer = CardDealer.getInstance();
-       dealer.giveTreasureBack(t);
        
        dieIfNoTreasures();        
     }
@@ -215,7 +200,7 @@ public class Player {
         Dice dice = Dice.getInstance();
         bringToLife();
         int diceNumber = dice.nextNumber();
-        System.out.println("\nTIRADA DE DADO : " + diceNumber + "\n");
+        System.out.println("\nTIRADA DEL DADO : " + diceNumber);
         switch(diceNumber){
             case 1:
                 Treasure t = dealer.nextTreasure();
@@ -245,6 +230,11 @@ public class Player {
                    hiddenTreasures.add(j);
             break;
         }
+        
+        dieIfNoTreasures(); //En caso de que al ir a robar no haya cartas en
+        //ninguna de las dos barajas, el jugador tambien debe aparecer como muerto
+        //si antes de intentar robar no tenia tesoros y al no poder robar sigue 
+        //sin tener
     }
     
     public int getLevels(){
@@ -288,24 +278,39 @@ public class Player {
     public void discardAllTreasures(){
         ArrayList<Treasure> copiaVisible = new ArrayList<>(visibleTreasures);
         ArrayList<Treasure> copiaHidden = new ArrayList<> (hiddenTreasures);
+        CardDealer dealer = CardDealer.getInstance();
         
-        for(Treasure treasure : copiaVisible)
+        for(Treasure treasure : copiaVisible){
             discardVisibleTreasure(treasure);
-        for(Treasure treasure : copiaHidden)
+            //Lo pasamos al mazo de descartados (usedTreasures)
+            dealer.giveTreasureBack(treasure);
+        }
+        
+        for(Treasure treasure : copiaHidden){
             discardHiddenTreasure(treasure);
+            //Lo pasamos al mazo de descartados (usedTreasures)
+            dealer.giveTreasureBack(treasure);
+        }
        
     }
     
     @Override
     public String toString (){
-        String resp = "\nNOMBRE : " + name + "\n" +
-                    "Nivel :\t" + level + "\tPoder :\t" + getCombatLevel() + "\n" +
-                    "Enemigo : " + enemy.getName() + "\n" +
-                    "Mal rollo pendiente : \n";
-                    if(pendingBadConsequence == null || pendingBadConsequence.isEmpty())
-                        resp += "-NO HAY-";
-                    else
-                        resp += pendingBadConsequence.toString();
+        String resp =  name +
+        "\nNivel : " + level + "\tNivel de combate : " + getCombatLevel();
+        if(canISteal)
+            resp += "\nEnemigo : " + enemy.getName() + "\n";
+        
+        if(!isDead())
+            resp += "Jugador vivo";
+        else
+            resp += "Jugador muerto";
+                    
+        resp += "\nMal rollo pendiente : \n";
+        if(pendingBadConsequence == null || pendingBadConsequence.isEmpty())
+            resp += "-NO HAY-";
+        else
+            resp += pendingBadConsequence.toString();
               
         return resp;
     }

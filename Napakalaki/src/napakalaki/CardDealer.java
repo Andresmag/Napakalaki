@@ -63,7 +63,7 @@ public class CardDealer {
         unusedTreasures.add(new Treasure("Shogulador", 1, TreasureKind.BOTHHANDS));
         unusedTreasures.add(new Treasure("Varita de atizamiento", 3, TreasureKind.ONEHAND));
         unusedTreasures.add(new Treasure("Tentaculo de pega", 2, TreasureKind.HELMET));
-        unusedTreasures.add(new Treasure("Zapato deja-amigos", 1, TreasureKind.SHOES));
+       unusedTreasures.add(new Treasure("Zapato deja-amigos", 1, TreasureKind.SHOES));
         
          shuffleTreasures();    //Los barajamos una vez introducidos
     }
@@ -244,19 +244,18 @@ public class CardDealer {
         Treasure t = null;
         if(unusedTreasures.isEmpty()){
             if(!usedTreasures.isEmpty()){
-            //Lo volvemos a rellenar
-            for(Treasure usedTreasure : usedTreasures)
-                unusedTreasures.add(usedTreasure);
-            
-            //Lo volvemos a barajar
-            shuffleTreasures();
-            
-            //Limpiamos el mazo de descartes
-            usedTreasures.clear();
+                //Lo volvemos a rellenar
+                for(Treasure usedTreasure : usedTreasures)
+                    unusedTreasures.add(usedTreasure);
+
+                //Lo volvemos a barajar
+                shuffleTreasures();
+
+                //Limpiamos el mazo de descartes
+                usedTreasures.clear();
             }
             else
                 System.out.println("No hay cartas tampoco en el mazo de descartes");
-            
         }
         
         if(!unusedTreasures.isEmpty()){
@@ -266,6 +265,7 @@ public class CardDealer {
             //Y lo quitamos del mazo de donde se cogen para evitar repetirlo
             unusedTreasures.remove(t);
         }
+        
         return t;
     }
     

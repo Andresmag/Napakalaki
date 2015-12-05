@@ -58,8 +58,9 @@ public class Napakalaki {
             else
               currentPlayer = players.get(num+1);
         }
-         System.out.println("\nNEXT PLAYER : " + currentPlayer.getName() + "\n");
-         return currentPlayer;
+        
+        System.out.println("\nNEXT PLAYER : " + currentPlayer.getName());
+        return currentPlayer;
     }
 
     private boolean nextTurnAllowed(){
@@ -96,14 +97,16 @@ public class Napakalaki {
     }
     
     public void discardVisibleTreasures(ArrayList<Treasure> treasures){
-        for (Treasure treasure : treasures) {
+        ArrayList<Treasure> copia = new ArrayList(treasures);
+        for (Treasure treasure : copia) {
             currentPlayer.discardVisibleTreasure(treasure);
             dealer.giveTreasureBack(treasure);
         }
     }
  
     public void discardHiddenTreasures(ArrayList<Treasure> treasures){
-        for (Treasure treasure : treasures) {
+        ArrayList<Treasure> copia = new ArrayList(treasures);
+        for (Treasure treasure : copia) {
             currentPlayer.discardHiddenTreasure(treasure);
             dealer.giveTreasureBack(treasure);
         }

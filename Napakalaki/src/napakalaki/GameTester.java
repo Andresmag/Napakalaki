@@ -31,7 +31,7 @@ public class GameTester {
       currentPlayer = game.getCurrentPlayer();
       do { // Mientras el jugador se decide a conocer al monstruo
         System.out.println ("******* ******* ******* ******* ******* ******* *******");
-        System.out.println ("\n\n Turno de: " + currentPlayer.toString());
+        System.out.println ("\n\nTurno de: " + currentPlayer.toString());
         command = getCommandBeforeKnowingMonster ();
         command = processCommand (command, currentPlayer);        
       } while (command != Command.Exit && command != Command.ShowMonster);

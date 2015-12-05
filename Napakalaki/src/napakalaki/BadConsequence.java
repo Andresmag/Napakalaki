@@ -95,7 +95,7 @@ public class BadConsequence {
      if(nVisibleTreasures > 0)
         nVisibleTreasures -= 1;
      else
-        specificVisibleTreasures.remove(t.getType() );
+        specificVisibleTreasures.remove(t.getType());
     }
     
     public void substractHiddenTreasure(Treasure t){
@@ -106,9 +106,9 @@ public class BadConsequence {
     }
     
     public boolean isEmpty(){
-        boolean esta_vacia = ( nHiddenTreasures == 0 && nVisibleTreasures == 0 &&
+        boolean esta_vacio = ( nHiddenTreasures == 0 && nVisibleTreasures == 0 &&
                 specificHiddenTreasures.isEmpty() && specificVisibleTreasures.isEmpty() );        
-        return esta_vacia;
+        return esta_vacio;
     }
 
     
@@ -116,35 +116,49 @@ public class BadConsequence {
         BadConsequence badConse= null;
         ArrayList<TreasureKind> badSpecificVisible = new ArrayList<> ();
         ArrayList<TreasureKind> badSpecificHidden = new ArrayList<> ();
+        
         if(nVisibleTreasures > 0 || nHiddenTreasures > 0){
             int badvisible=nVisibleTreasures, badhidden=nHiddenTreasures;
             if(badvisible > v.size())
                 badvisible = v.size();
             if(badhidden > h.size())
-                badhidden = v.size();
+                badhidden = h.size();
+            
             badConse = new BadConsequence(getText(),getLevels(),badvisible,badhidden);
         }
         else{
-            for(TreasureKind type : specificVisibleTreasures){
-                Treasure tesv,tesh;
-                boolean insertadov = false;
-                boolean insertadoh = false;
-                int tamv = v.size(), tamh = h.size(), i=0,j=0;
-                while(i < tamv && !insertadov){
-                    tesv = v.get(i);
-                    insertadov = tesv.getType() == type;
-                    i++;
+            if(!specificVisibleTreasures.isEmpty()){
+                for(TreasureKind type : specificVisibleTreasures){
+                    Treasure tesv;
+                    boolean insertadov = false;
+                    int tamv = v.size(), i=0;
+
+                    while(i < tamv && !insertadov){
+                        tesv = v.get(i);
+                        insertadov = tesv.getType() == type;
+                        i++;
+                    }
+                    if(insertadov)
+                        badSpecificVisible.add(type);
                 }
-                while(j < tamh && !insertadoh){
-                    tesh = h.get(j);
-                    insertadoh = tesh.getType() == type;
-                    j++;
-                }
-                if(insertadoh)
-                    badSpecificHidden.add(type);
-                if(insertadov)
-                    badSpecificVisible.add(type);
             }
+            
+            if(!specificHiddenTreasures.isEmpty()){
+                for(TreasureKind type : specificHiddenTreasures){
+                    Treasure tesh;
+                    boolean insertadoh = false;
+                    int tamh = h.size(), j=0;
+
+                    while(j < tamh && !insertadoh){
+                        tesh = h.get(j);
+                        insertadoh = tesh.getType() == type;
+                        j++;
+                    }
+                    if(insertadoh)
+                        badSpecificHidden.add(type);
+                }
+            }
+            
             badConse = new BadConsequence(getText(),getLevels(),badSpecificVisible,badSpecificHidden);   
         }
         
