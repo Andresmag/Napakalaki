@@ -299,12 +299,12 @@ public class Player {
         String resp =  name +
         "\nNivel : " + level + "\tNivel de combate : " + getCombatLevel();
         if(canISteal)
-            resp += "\nEnemigo : " + enemy.getName() + "\n";
+            resp += "\nEnemigo : " + enemy.getName();
         
         if(!isDead())
-            resp += "Jugador vivo";
+            resp += "\nJugador vivo";
         else
-            resp += "Jugador muerto";
+            resp += "\nJugador muerto";
                     
         resp += "\nMal rollo pendiente : \n";
         if(pendingBadConsequence == null || pendingBadConsequence.isEmpty())
