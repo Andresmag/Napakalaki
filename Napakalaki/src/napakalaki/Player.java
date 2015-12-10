@@ -198,36 +198,29 @@ public class Player {
     public void initTreasures(){
         CardDealer dealer = CardDealer.getInstance();
         Dice dice = Dice.getInstance();
+        Treasure t;
         bringToLife();
         int diceNumber = dice.nextNumber();
         System.out.println("\nTIRADA DEL DADO : " + diceNumber);
         switch(diceNumber){
             case 1:
-                Treasure t = dealer.nextTreasure();
+                t = dealer.nextTreasure();
                 if(t != null)
                     hiddenTreasures.add(t);
             break;
             case 6:
-                Treasure p = dealer.nextTreasure();
-                if(p != null)
-                   hiddenTreasures.add(p);
-                
-                p = dealer.nextTreasure();
-                if(p != null)
-                   hiddenTreasures.add(p);
-                
-                p = dealer.nextTreasure();
-                if(p != null)
-                   hiddenTreasures.add(p);
+                for(int i=0; i<3; i++){
+                    t = dealer.nextTreasure();
+                    if(t != null)
+                        hiddenTreasures.add(t);
+                }
             break;
             default:
-                Treasure j = dealer.nextTreasure();
-                if(j != null)
-                   hiddenTreasures.add(j);
-                
-                j = dealer.nextTreasure();
-                if(j != null)
-                   hiddenTreasures.add(j);
+                for(int i=0; i<2; i++){
+                    t = dealer.nextTreasure();
+                    if(t != null)
+                        hiddenTreasures.add(t);
+                }
             break;
         }
         
