@@ -128,34 +128,36 @@ public class BadConsequence {
         }
         else{
             if(!specificVisibleTreasures.isEmpty()){
+                ArrayList <Treasure> copiav = new ArrayList(v);
                 for(TreasureKind type : specificVisibleTreasures){
-                    Treasure tesv;
-                    boolean insertadov = false;
-                    int tamv = v.size(), i=0;
+                    int i = 0;
+                    boolean encontradov = false;
 
-                    while(i < tamv && !insertadov){
-                        tesv = v.get(i);
-                        insertadov = tesv.getType() == type;
+                    while((i < copiav.size()) && !encontradov){
+                        if(copiav.get(i).getType() == type){
+                            encontradov = true;
+                            badSpecificVisible.add(type);
+                            copiav.remove(i);
+                        }
                         i++;
                     }
-                    if(insertadov)
-                        badSpecificVisible.add(type);
                 }
             }
             
             if(!specificHiddenTreasures.isEmpty()){
+                ArrayList <Treasure> copiah = new ArrayList(h);
                 for(TreasureKind type : specificHiddenTreasures){
-                    Treasure tesh;
-                    boolean insertadoh = false;
-                    int tamh = h.size(), j=0;
-
-                    while(j < tamh && !insertadoh){
-                        tesh = h.get(j);
-                        insertadoh = tesh.getType() == type;
+                    int j = 0;
+                    boolean encontradoh = false;
+                    
+                    while((j < copiah.size()) && !encontradoh){
+                        if(copiah.get(j).getType() == type){
+                            encontradoh = true;
+                            badSpecificHidden.add(type);
+                            copiah.remove(j);
+                        }
                         j++;
                     }
-                    if(insertadoh)
-                        badSpecificHidden.add(type);
                 }
             }
             

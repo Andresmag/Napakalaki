@@ -18,10 +18,10 @@ public class Player {
     private int level;
     private boolean dead = true;
     private boolean canISteal = true;
-    private Player enemy;
+    protected Player enemy;
     private BadConsequence pendingBadConsequence;
     private ArrayList<Treasure> hiddenTreasures = new ArrayList();
-    private ArrayList<Treasure> visibleTreasures = new ArrayList();
+    protected ArrayList<Treasure> visibleTreasures = new ArrayList();
    
     //Métodos
     public Player(String newName){ 
@@ -31,17 +31,31 @@ public class Player {
         pendingBadConsequence = null;
     }
     
+    public Player(Player p){
+        name = p.getName();
+        level = p.getLevels();
+        dead = p.isDead();
+        canISteal = p.canISteal();
+        enemy = p.enemy;
+        pendingBadConsequence = p.pendingBadConsequence;
+        visibleTreasures = p.getVisibleTreasures();
+        hiddenTreasures = p.getHiddenTreasures();
+    }
+    
     public String getName(){
         return name;
     }
     
     
     private void bringToLife(){
-        dead = false;   //Supongo que esto es traer a la vida
+        dead = false;   
     }
     
+    protected int getOponentLevel(Monster m){
+        return m.getCombatLevel();
+    }
     
-    private int getCombatLevel(){
+    protected int getCombatLevel(){
         int combatLevel = level;
         for(Treasure visibleTreasures : visibleTreasures){
             combatLevel += visibleTreasures.getBonus();
@@ -147,7 +161,7 @@ public class Player {
     public CombatResult combat(Monster m){
         CombatResult result;
         System.out.printf("\nHAY COMBATE\n");
-        if (getCombatLevel() > m.getCombatLevel() ){
+        if (getCombatLevel() > this.getOponentLevel(m)){
             applyPrize(m);
             if(level >= MAXLEVEL)
                 result = CombatResult.WINGAME;
@@ -156,7 +170,10 @@ public class Player {
         }
         else{
             applyBadConsequence(m);
-            result = CombatResult.LOSE;
+            if(this.shouldConvert())
+                result = CombatResult.LOSEANDCONVERT;
+            else
+                result = CombatResult.LOSE;
         }
         return result;
     }
@@ -230,6 +247,13 @@ public class Player {
         //sin tener
     }
     
+    protected boolean shouldConvert(){
+        Dice dice = Dice.getInstance();
+        int number = dice.nextNumber();
+        System.out.append("Numero obtenido al tirar el dado: " + number + "\n");
+        return (number == 1);
+    }
+    
     public int getLevels(){
         return level;
     }
@@ -249,7 +273,11 @@ public class Player {
         enemy = newEnemy;
     }
     
-    private Treasure giveMeATreasure(){
+    protected Player getEnemy(){
+        return this.enemy;
+    }
+    
+    protected Treasure giveMeATreasure(){
         int posAleatoria = (int) (Math.random()* hiddenTreasures.size() );
         Treasure lostTreasure =hiddenTreasures.get(posAleatoria);
         hiddenTreasures.remove(lostTreasure);
@@ -260,7 +288,7 @@ public class Player {
         return canISteal;
     }
     
-    private boolean canYouGiveMeATreasure(){
+    protected boolean canYouGiveMeATreasure(){
         return (!hiddenTreasures.isEmpty());
     }
     

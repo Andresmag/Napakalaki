@@ -20,13 +20,15 @@ public class CardDealer {
     private ArrayList<Monster> usedMonsters;
     private ArrayList<Treasure> unusedTreasures;
     private ArrayList<Treasure> usedTreasures;
+    private ArrayList<Cultist> unusedCultist;
     
     //Constructor privado.
     private CardDealer(){
         unusedMonsters = new ArrayList();
         usedMonsters = new ArrayList();
         unusedTreasures = new ArrayList();
-        usedTreasures = new ArrayList();    
+        usedTreasures = new ArrayList();
+        unusedCultist = new ArrayList();
     }
     
     private void initTreasureCardDeck(){
@@ -67,7 +69,7 @@ public class CardDealer {
         
          shuffleTreasures();    //Los barajamos una vez introducidos
     }
- 
+    
     private void initMonsterCardDeck(){
         //Como los Arrays ya estan inicializados, introducimos las cartas
         // directamente en unused
@@ -223,7 +225,66 @@ public class CardDealer {
         prize = new Prize(1, 1);
         unusedMonsters.add(new Monster("Bicefalo", 20, badConsequence, prize));
         
+        //monstruos[19] = El mal indecible impronunciable
+        badConsequence = new BadConsequence("Pierdes una mano visible",
+                0, new ArrayList(Arrays.asList(TreasureKind.ONEHAND)), new ArrayList());
+        prize = new Prize(1, 3);
+        unusedMonsters.add(new Monster("El mal indecible impronunciable", 10, badConsequence, prize, -2));
+        
+        //monstruos[20] = Testigos oculares
+        badConsequence = new BadConsequence("Pierdes tus tesoros visibles. Jajaja.",
+                0, BadConsequence.MAXTREASURES, 0);
+        prize = new Prize(1, 2);
+        unusedMonsters.add(new Monster("Testigos oculares", 6, badConsequence, prize, 2));
+        
+        //monstruos[21] = El gran Cthulhu
+        badConsequence = new BadConsequence("Hoy no es tu dia de suerte. Mueres",
+                true);
+        prize = new Prize(2, 5);
+        unusedMonsters.add(new Monster("El gran Cthulhu", 10, badConsequence, prize, 4));
+        
+        //monstruos[22] = Serpiente político
+        badConsequence = new BadConsequence("Tu gobierno te recorta 2 niveles",
+                2, 0, 0);
+        prize = new Prize(1, 2);
+        unusedMonsters.add(new Monster("Serpiente Politico", 8, badConsequence, prize, -2));
+        
+        //monstruos[23] = Felpuggoth
+        badConsequence = new BadConsequence("Pierdes tu casco y tu armadura visible. Pierdes tus manos ocultas",
+                0,
+                new ArrayList(Arrays.asList(TreasureKind.HELMET, TreasureKind.ARMOR)), 
+                new ArrayList(Arrays.asList(TreasureKind.ONEHAND, TreasureKind.ONEHAND, TreasureKind.ONEHAND, TreasureKind.ONEHAND,
+                        TreasureKind.BOTHHANDS, TreasureKind.BOTHHANDS, TreasureKind.BOTHHANDS, TreasureKind.BOTHHANDS)));
+        prize = new Prize(1, 1);
+        unusedMonsters.add(new Monster("Felpuggoth", 2, badConsequence, prize, 5));
+        
+        //monstruos[24] = Shoggoth
+        badConsequence = new BadConsequence("Pierdes 2 niveles",
+                2, 0, 0);
+        prize = new Prize(2, 4);
+        unusedMonsters.add(new Monster("Shoggoth", 16, badConsequence, prize, -4));
+        
+        //monstruos[25] = Lolitagooth
+        badConsequence = new BadConsequence("Pintalabios negro. Pierdes 2 niveles",
+                2, 0, 0);
+        prize = new Prize(1, 1);
+        unusedMonsters.add(new Monster("Lolitagooth", 2, badConsequence, prize, 3));
+        
         shuffleMonsters(); //Los barajamos una vez incluidos
+    }
+    
+    private void initCultistCardDeck(){
+        //Como los Arrays ya estan inicializados, introducimos las cartas
+        // directamente en unused
+        
+        unusedCultist.add(new Cultist("Sectario", 1));
+        unusedCultist.add(new Cultist("Sectario", 2));
+        unusedCultist.add(new Cultist("Sectario", 1));
+        unusedCultist.add(new Cultist("Sectario", 2));
+        unusedCultist.add(new Cultist("Sectario", 1));
+        unusedCultist.add(new Cultist("Sectario", 1));
+        
+        shuffleCultist(); //Los barajamos una vez introducidos
     }
     
     private void shuffleTreasures(){
@@ -232,6 +293,10 @@ public class CardDealer {
     
     private void shuffleMonsters(){
         Collections.shuffle(unusedMonsters);
+    }
+    
+    private void shuffleCultist(){
+        Collections.shuffle(unusedCultist);
     }
     
     public static CardDealer getInstance(){
@@ -295,6 +360,13 @@ public class CardDealer {
         return m;  
     }
     
+    public Cultist nextCultist(){
+        Cultist c = unusedCultist.get(0); //Cojemos el primero
+        unusedCultist.remove(c); //Lo quitamos de la lista para no volver a cogerlo
+        
+        return c;        
+    }
+    
     public void giveTreasureBack(Treasure t){
         usedTreasures.add(t);
     }
@@ -306,6 +378,7 @@ public class CardDealer {
     public void initCards (){
         initTreasureCardDeck();
         initMonsterCardDeck();
+        initCultistCardDeck();
     }
     
 }

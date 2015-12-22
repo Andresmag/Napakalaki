@@ -15,6 +15,7 @@ public class Monster {
     //Atributos
     private String name;
     private int combatLevel;
+    private int levelChangeAgainstCultistPlayer;
     
     //Atributos de otras clases
     private Prize price;
@@ -27,6 +28,10 @@ public class Monster {
     
     public int getCombatLevel(){
         return combatLevel;
+    }
+    
+    public int getCombatLevelAgainstCultistPlayer(){
+        return (this.getCombatLevel() + levelChangeAgainstCultistPlayer);
     }
 
     public BadConsequence getBadConsequence (){
@@ -41,12 +46,21 @@ public class Monster {
         return price.getTreasures();
     }
     
-    //Constructor
+    //Constructores
     public Monster(String newName, int level, BadConsequence newBC, Prize newPrice){
         name = newName;
         combatLevel = level;
         bc = newBC;
         price = newPrice;
+        levelChangeAgainstCultistPlayer = 0;
+    }
+    
+    public Monster(String n, int l, BadConsequence b, Prize p, int IC){
+        name = n;
+        combatLevel = l;
+        bc = b;
+        price = p;
+        levelChangeAgainstCultistPlayer = IC;
     }
     
     @Override
