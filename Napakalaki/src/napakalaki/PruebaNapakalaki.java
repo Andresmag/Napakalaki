@@ -27,7 +27,7 @@ public class PruebaNapakalaki {
                 System.out.println(monstruo.toString());
         }
     }
-    
+    /*
     //Consulta los monstruos que solo implican perdida de niveles
     public static void ConsultaSoloNiveles (ArrayList<Monster> monstruos){
         System.out.println("MONSTRUOS CUYO MAL ROLLO SOLO IMPLICA PERDIDA DE NIVELES:");
@@ -58,7 +58,7 @@ public class PruebaNapakalaki {
                 System.out.println(monstruo.toString());
         }
     }      
-            
+     */       
             
     public static void main(String[] args) {
         
@@ -92,13 +92,5 @@ public class PruebaNapakalaki {
         t = new Treasure("Espada mata Algebros", 5, TreasureKind.BOTHHANDS);
         System.out.println(t.toString());
 */
-        Dice dice = Dice.getInstance();
-        System.out.println(dice.toString());
-       
-        CardDealer carddealer = CardDealer.getInstance();
-        carddealer.initCards();
-        System.out.println(carddealer.nextMonster());
-        System.out.println(carddealer.nextTreasure());
-        System.out.println(carddealer.nextMonster());
     }
 }
