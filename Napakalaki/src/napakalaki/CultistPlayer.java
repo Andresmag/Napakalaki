@@ -14,14 +14,13 @@ package napakalaki;
 public class CultistPlayer extends Player{
     //Atributos
     private static int totalCultistPlayers = 0;
-    CardDealer dealer = CardDealer.getInstance();
-    Cultist myCultistCard = null;
+    Cultist myCultistCard;
 
     //Constructor
     public CultistPlayer(Player p, Cultist c){
         super(p);
-        totalCultistPlayers++;
-        myCultistCard = dealer.nextCultist();  
+        myCultistCard = c;
+        totalCultistPlayers++;  
     }
     
     //Metodos

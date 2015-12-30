@@ -31,7 +31,8 @@ public class Monster {
     }
     
     public int getCombatLevelAgainstCultistPlayer(){
-        return (this.getCombatLevel() + levelChangeAgainstCultistPlayer);
+        int level = this.getCombatLevel() + levelChangeAgainstCultistPlayer;
+        return level;
     }
 
     public BadConsequence getBadConsequence (){
@@ -65,7 +66,10 @@ public class Monster {
     
     @Override
     public String toString(){
-        String resp = "\nNombre: " + name + "\t  Nivel: " +Integer.toString(combatLevel);
+        String resp = "\nNombre: " + name + "\t  Nivel: " + getCombatLevel();
+        if(levelChangeAgainstCultistPlayer != 0)
+            resp += "\nNivel contra sectarios: " + getCombatLevelAgainstCultistPlayer();
+        
         resp +=  "\nNiveles que ganas: " + getLevelsGained() + "\tTesoros que ganas: " + getTreasuresGained();
         resp += "\nMal rollo: " + bc.toString();
         return resp;
