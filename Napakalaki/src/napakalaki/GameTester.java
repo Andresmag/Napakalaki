@@ -37,6 +37,7 @@ public class GameTester {
       } while (command != Command.Exit && command != Command.ShowMonster);
       if (command == Command.ShowMonster) {
         do { // Mientras el jugador se decida a combatir 
+          currentPlayer = game.getCurrentPlayer(); // Para que se actualice por si se ha vuelto sectario
           System.out.println ("******* ******* ******* ******* ******* ******* *******");
           System.out.println ("\n\n Turno de: " + currentPlayer.toString());
           command = getCommandBeforeFighting ();
@@ -58,6 +59,7 @@ public class GameTester {
           }
           if (combatResult != CombatResult.WINGAME) {
             do { // Hasta que se avance de turno 
+              currentPlayer = game.getCurrentPlayer(); // Para que se actualice por si se ha vuelto sectario
               System.out.println ("******* ******* ******* ******* ******* ******* *******");
               System.out.println ("\n\n Turno de: " + currentPlayer.toString());
               if (currentPlayer.canISteal())

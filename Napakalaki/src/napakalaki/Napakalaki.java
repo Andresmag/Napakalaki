@@ -95,8 +95,22 @@ public class Napakalaki {
         dealer.giveMonsterBack(currentMonster);
         if(resp == CombatResult.LOSEANDCONVERT){
             Cultist card = dealer.nextCultist();
+            System.out.println(card.toString()); //Para que se pueda saber si es por 1 o por 2 por cada sectario en juego
             CultistPlayer sectario = new CultistPlayer(currentPlayer, card);
             int pos = players.indexOf(currentPlayer);
+            
+            //Es necesario reasignar el enemigo que se ha convertido en sectario
+            //para que se le robe de los visibles en lugar de los ocultos
+            int i = 0;
+            boolean encontrado = false;
+            while(i<players.size() && !encontrado){
+                if(players.get(i).getEnemy() == players.get(pos)){
+                    encontrado = true;
+                    players.get(i).setEnemy(sectario);
+                }
+                i++;
+            }
+           
             players.set(pos, sectario);
             currentPlayer = players.get(pos);
         }

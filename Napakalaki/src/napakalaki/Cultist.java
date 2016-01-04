@@ -29,7 +29,7 @@ public class Cultist {
     @Override
     public String toString(){
         String resp = "\nNombre de sectario: " + name;
-        resp += "\nNiveles que ganas por cada otro sectario: " + getGainedLevels();
+        resp += "\nNiveles que ganas por cada sectario en juego: " + getGainedLevels();
         
         return resp;
     }

@@ -170,8 +170,10 @@ public class Player {
         }
         else{
             applyBadConsequence(m);
-            if(this.shouldConvert())
+            if(this.shouldConvert()){
+                System.out.println("CONVERSION A SECTARIO");
                 result = CombatResult.LOSEANDCONVERT;
+            }
             else
                 result = CombatResult.LOSE;
         }
