@@ -241,7 +241,7 @@ public class CardDealer {
         badConsequence = new DeathBadConsequence("Hoy no es tu dia de suerte. Mueres",
                 true);
         prize = new Prize(2, 5);
-        unusedMonsters.add(new Monster("El gran Cthulhu", 10, badConsequence, prize, 4));
+        unusedMonsters.add(new Monster("El gran Cthulhu", 20, badConsequence, prize, 4));
         
         //monstruos[22] = Serpiente político
         badConsequence = new NumericBadConsequence("Tu gobierno te recorta 2 niveles",
