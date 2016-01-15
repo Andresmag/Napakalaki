@@ -1,6 +1,8 @@
 
 package napakalaki;
 
+import Test.GameTester;
+
 
 public class EjemploMain {
 

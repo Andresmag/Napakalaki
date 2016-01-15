@@ -1,5 +1,5 @@
 
-package napakalaki;
+package Test;
 
 public enum Command {
   Exit (0, "Salir del juego"),

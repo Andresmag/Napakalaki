@@ -5,6 +5,7 @@
  */
 package napakalaki;
 
+import GUI.Dice;
 import java.util.ArrayList;
 
 /**

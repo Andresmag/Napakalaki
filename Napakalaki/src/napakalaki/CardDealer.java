@@ -11,7 +11,8 @@ import java.util.Collections;
 
 /**
  *
- * @author Alejandro
+ * @author Algebro
+ * @author Andresmag
  */
 public class CardDealer {
     
@@ -65,7 +66,7 @@ public class CardDealer {
         unusedTreasures.add(new Treasure("Shogulador", 1, TreasureKind.BOTHHANDS));
         unusedTreasures.add(new Treasure("Varita de atizamiento", 3, TreasureKind.ONEHAND));
         unusedTreasures.add(new Treasure("Tentaculo de pega", 2, TreasureKind.HELMET));
-       unusedTreasures.add(new Treasure("Zapato deja-amigos", 1, TreasureKind.SHOES));
+        unusedTreasures.add(new Treasure("Zapato deja-amigos", 1, TreasureKind.SHOES));
         
          shuffleTreasures();    //Los barajamos una vez introducidos
     }
@@ -241,7 +242,7 @@ public class CardDealer {
         badConsequence = new DeathBadConsequence("Hoy no es tu dia de suerte. Mueres",
                 true);
         prize = new Prize(2, 5);
-        unusedMonsters.add(new Monster("El gran Cthulhu", 10, badConsequence, prize, 4));
+        unusedMonsters.add(new Monster("El gran Cthulhu", 20, badConsequence, prize, 4));
         
         //monstruos[22] = Serpiente político
         badConsequence = new NumericBadConsequence("Tu gobierno te recorta 2 niveles",

@@ -1,10 +1,14 @@
 
-package napakalaki;
+package Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Arrays;
+import napakalaki.CombatResult;
+import napakalaki.Napakalaki;
+import napakalaki.Player;
+import napakalaki.Treasure;
 
 public class GameTester {
   
