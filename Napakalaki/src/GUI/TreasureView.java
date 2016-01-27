@@ -40,23 +40,34 @@ public class TreasureView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        name = new javax.swing.JLabel();
         bonus = new javax.swing.JLabel();
         type = new javax.swing.JLabel();
-
-        name.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        name.setText("nombre");
+        jScrollPane1 = new javax.swing.JScrollPane();
+        name = new javax.swing.JTextArea();
 
         bonus.setFont(new java.awt.Font("sansserif", 1, 36)); // NOI18N
+        bonus.setForeground(new java.awt.Color(0, 0, 0));
         bonus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         bonus.setLabelFor(bonus);
-        bonus.setText("level");
-        bonus.setBorder(null);
+        bonus.setText("4");
+        bonus.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Bonus", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 12), new java.awt.Color(0, 0, 0))); // NOI18N
 
-        type.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        type.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        type.setForeground(new java.awt.Color(0, 0, 0));
         type.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        type.setText("type");
+        type.setText("Bothhands");
+        type.setBorder(null);
+
+        name.setEditable(false);
+        name.setBackground(new java.awt.Color(153, 153, 153));
+        name.setColumns(200);
+        name.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        name.setForeground(new java.awt.Color(0, 0, 0));
+        name.setLineWrap(true);
+        name.setRows(2);
+        name.setWrapStyleWord(true);
+        name.setSelectedTextColor(new java.awt.Color(0, 0, 0));
+        jScrollPane1.setViewportView(name);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -64,28 +75,29 @@ public class TreasureView extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(type, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                    .addComponent(bonus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(name, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(bonus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(type, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(bonus, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bonus, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(type, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(type))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bonus;
-    private javax.swing.JLabel name;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea name;
     private javax.swing.JLabel type;
     // End of variables declaration//GEN-END:variables
 }

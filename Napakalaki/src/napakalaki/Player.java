@@ -56,7 +56,11 @@ public class Player {
         return m.getCombatLevel();
     }
     
-    protected int getCombatLevel(){
+    public String getEnemyName(){
+        return enemy.getName();
+    }
+    
+    public int getCombatLevel(){
         int combatLevel = level;
         for(Treasure visibleTreasures : visibleTreasures){
             combatLevel += visibleTreasures.getBonus();
@@ -77,6 +81,10 @@ public class Player {
     
     private void setPendingBadConsequence(BadConsequence b){
         pendingBadConsequence = b;
+    }
+    
+    public BadConsequence getPendingBadConsequence(){
+        return pendingBadConsequence;
     }
     
     private void applyPrize(Monster m){
@@ -323,7 +331,7 @@ public class Player {
         String resp =  name +
         "\nNivel : " + level + "\tNivel de combate : " + getCombatLevel();
         if(canISteal)
-            resp += "\nEnemigo : " + enemy.getName();
+            resp += "\nEnemigo : " + getEnemyName();
         
         if(!isDead())
             resp += "\nJugador vivo";

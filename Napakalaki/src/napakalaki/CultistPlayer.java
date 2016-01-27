@@ -24,12 +24,12 @@ public class CultistPlayer extends Player{
     }
     
     //Metodos
-    public int getTotalCultistPlayers(){
+    public static int getTotalCultistPlayers(){
         return totalCultistPlayers;
     }
     
     @Override
-    protected int getCombatLevel(){
+    public int getCombatLevel(){
         int suma = (int) (super.getCombatLevel() * 1.2);
         suma += myCultistCard.getGainedLevels() * totalCultistPlayers;
         return suma;
