@@ -94,7 +94,9 @@ public class PlayerView extends javax.swing.JPanel {
         discardAllTreasures = new javax.swing.JButton();
 
         name.setBackground(new java.awt.Color(255, 255, 255));
+        name.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
         name.setForeground(new java.awt.Color(0, 0, 0));
+        name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         name.setText("Nombre");
         name.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.MatteBorder(null), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         name.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));

@@ -44,10 +44,18 @@ public class TreasureView extends javax.swing.JPanel {
         bonus = new javax.swing.JLabel();
         type = new javax.swing.JLabel();
 
+        name.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         name.setText("nombre");
 
+        bonus.setFont(new java.awt.Font("sansserif", 1, 36)); // NOI18N
+        bonus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        bonus.setLabelFor(bonus);
         bonus.setText("level");
+        bonus.setBorder(null);
 
+        type.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        type.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         type.setText("type");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
