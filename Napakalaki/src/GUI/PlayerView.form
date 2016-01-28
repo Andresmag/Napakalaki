@@ -27,13 +27,13 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="makeVisible" min="-2" pref="165" max="-2" attributes="0"/>
+                      <Component id="makeVisible" min="-2" pref="153" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="stealTreasure" pref="157" max="32767" attributes="0"/>
+                      <Component id="stealTreasure" min="-2" pref="145" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="discardTreasures" min="-2" pref="160" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="discardAllTreasures" min="-2" pref="181" max="-2" attributes="0"/>
+                      <Component id="discardAllTreasures" pref="205" max="32767" attributes="0"/>
                   </Group>
                   <Component id="hiddenTreasures" alignment="0" max="32767" attributes="0"/>
                   <Component id="visibleTreasures" alignment="1" max="32767" attributes="0"/>
@@ -50,9 +50,9 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="discardTreasures" alignment="0" pref="78" max="32767" attributes="0"/>
-                          <Component id="stealTreasure" alignment="0" max="32767" attributes="0"/>
                           <Component id="makeVisible" alignment="0" max="32767" attributes="0"/>
-                          <Component id="discardAllTreasures" max="32767" attributes="0"/>
+                          <Component id="stealTreasure" alignment="1" max="32767" attributes="0"/>
+                          <Component id="discardAllTreasures" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="visibleTreasures" max="32767" attributes="0"/>
@@ -426,12 +426,12 @@
     <Component class="javax.swing.JButton" name="makeVisible">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="33" green="33" red="0" type="rgb"/>
+          <Color blue="99" green="0" red="99" type="rgb"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Make Visible"/>
+        <Property name="text" type="java.lang.String" value="Hacer visibles"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Cursor de Mano"/>
         </Property>
@@ -443,12 +443,12 @@
     <Component class="javax.swing.JButton" name="stealTreasure">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="33" green="33" red="0" type="rgb"/>
+          <Color blue="99" green="0" red="99" type="rgb"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Steal Treasure"/>
+        <Property name="text" type="java.lang.String" value="Robar tesoro"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Cursor de Mano"/>
         </Property>
@@ -460,12 +460,12 @@
     <Component class="javax.swing.JButton" name="discardTreasures">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="33" green="33" red="0" type="rgb"/>
+          <Color blue="99" green="0" red="99" type="rgb"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Discard Treasures"/>
+        <Property name="text" type="java.lang.String" value="Descartar tesoros"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Cursor de Mano"/>
         </Property>
@@ -485,11 +485,14 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Discard All Treasures"/>
+        <Property name="text" type="java.lang.String" value="Descartar todos los tesoros"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Cursor de Mano"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="discardAllTreasuresActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -43,6 +43,7 @@ public class TreasureView extends javax.swing.JPanel {
      */
     public TreasureView() {
         initComponents();
+        setBackground(Color.LIGHT_GRAY);
     }
 
     /**
@@ -59,7 +60,7 @@ public class TreasureView extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         name = new javax.swing.JTextArea();
 
-        setForeground(new java.awt.Color(102, 102, 102));
+        setForeground(new java.awt.Color(255, 255, 255));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
@@ -117,7 +118,7 @@ public class TreasureView extends javax.swing.JPanel {
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         if(this.isSelected()){
             selected = false;
-            setBackground(Color.WHITE);
+            setBackground(Color.LIGHT_GRAY);
         }
         else{
             selected = true;

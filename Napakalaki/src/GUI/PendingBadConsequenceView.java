@@ -43,7 +43,7 @@ public class PendingBadConsequenceView extends javax.swing.JPanel {
 
         pendingText.setEditable(false);
         pendingText.setBackground(new java.awt.Color(153, 153, 153));
-        pendingText.setColumns(20);
+        pendingText.setColumns(14);
         pendingText.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         pendingText.setForeground(new java.awt.Color(0, 0, 0));
         pendingText.setRows(5);

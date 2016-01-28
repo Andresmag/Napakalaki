@@ -5,7 +5,9 @@
  */
 package GUI;
 
+import napakalaki.CultistPlayer;
 import napakalaki.Monster;
+import napakalaki.Napakalaki;
 import napakalaki.Prize;
 
 /**
@@ -15,17 +17,26 @@ import napakalaki.Prize;
 public class MonsterView extends javax.swing.JPanel {
     //Atributo
     private Monster monsterModel;
+    private Napakalaki napakalakiModel;
     
     //Setter
     public void setMonster(Monster aMonster){
         monsterModel = aMonster;
         this.name.setText(monsterModel.getName());
-        this.level.setText(Integer.toString(monsterModel.getCombatLevelAgainstCultistPlayer()));
         Prize price = new Prize(monsterModel.getLevelsGained(), monsterModel.getTreasuresGained());
         this.prize.setPrize(price);
         this.badConsequence.SetBadConsequence(monsterModel.getBadConsequence());
         
+        if(napakalakiModel.getCurrentPlayer() instanceof CultistPlayer)
+            this.level.setText(Integer.toString(monsterModel.getCombatLevelAgainstCultistPlayer()));
+        else
+            this.level.setText(Integer.toString(monsterModel.getCombatLevel()));
+        
         repaint();
+    }
+    
+    public void setNapakalaki(Napakalaki aNapakalaki){
+        napakalakiModel = aNapakalaki;
     }
     /**
      * Creates new form MonsterView

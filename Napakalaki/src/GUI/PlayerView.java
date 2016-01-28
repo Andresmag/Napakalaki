@@ -292,9 +292,9 @@ public class PlayerView extends javax.swing.JPanel {
 
         hiddenTreasures.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)), "Tesoros ocultos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Viner Hand ITC", 2, 14), new java.awt.Color(0, 0, 0))); // NOI18N
 
-        makeVisible.setBackground(new java.awt.Color(0, 51, 51));
+        makeVisible.setBackground(new java.awt.Color(153, 0, 153));
         makeVisible.setForeground(new java.awt.Color(255, 255, 255));
-        makeVisible.setText("Make Visible");
+        makeVisible.setText("Hacer visibles");
         makeVisible.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         makeVisible.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -302,9 +302,9 @@ public class PlayerView extends javax.swing.JPanel {
             }
         });
 
-        stealTreasure.setBackground(new java.awt.Color(0, 51, 51));
+        stealTreasure.setBackground(new java.awt.Color(153, 0, 153));
         stealTreasure.setForeground(new java.awt.Color(255, 255, 255));
-        stealTreasure.setText("Steal Treasure");
+        stealTreasure.setText("Robar tesoro");
         stealTreasure.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         stealTreasure.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -312,9 +312,9 @@ public class PlayerView extends javax.swing.JPanel {
             }
         });
 
-        discardTreasures.setBackground(new java.awt.Color(0, 51, 51));
+        discardTreasures.setBackground(new java.awt.Color(153, 0, 153));
         discardTreasures.setForeground(new java.awt.Color(255, 255, 255));
-        discardTreasures.setText("Discard Treasures");
+        discardTreasures.setText("Descartar tesoros");
         discardTreasures.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         discardTreasures.setPreferredSize(new java.awt.Dimension(147, 28));
         discardTreasures.addActionListener(new java.awt.event.ActionListener() {
@@ -325,8 +325,13 @@ public class PlayerView extends javax.swing.JPanel {
 
         discardAllTreasures.setBackground(new java.awt.Color(204, 0, 0));
         discardAllTreasures.setForeground(new java.awt.Color(255, 255, 255));
-        discardAllTreasures.setText("Discard All Treasures");
+        discardAllTreasures.setText("Descartar todos los tesoros");
         discardAllTreasures.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        discardAllTreasures.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                discardAllTreasuresActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -342,13 +347,13 @@ public class PlayerView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(makeVisible, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(makeVisible, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(stealTreasure, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                        .addComponent(stealTreasure, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(discardTreasures, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(discardAllTreasures, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(discardAllTreasures, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE))
                     .addComponent(hiddenTreasures, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(visibleTreasures, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -361,9 +366,9 @@ public class PlayerView extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(discardTreasures, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-                            .addComponent(stealTreasure, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(makeVisible, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(discardAllTreasures, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(stealTreasure, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(discardAllTreasures, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(visibleTreasures, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -380,11 +385,18 @@ public class PlayerView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void discardTreasuresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discardTreasuresActionPerformed
-        // TODO add your handling code here:
+        ArrayList<Treasure> selHidden = getSelectedTreasures(hiddenTreasures);
+        ArrayList<Treasure> selVisible = getSelectedTreasures(visibleTreasures);
+        
+        napakalakiModel.discardHiddenTreasures(selHidden);
+        napakalakiModel.discardVisibleTreasures(selVisible);
+        
+        setPlayer(napakalakiModel.getCurrentPlayer());
     }//GEN-LAST:event_discardTreasuresActionPerformed
 
     private void stealTreasureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stealTreasureActionPerformed
-        // TODO add your handling code here:
+        playerModel.stealTreasure();
+        setPlayer(napakalakiModel.getCurrentPlayer());
     }//GEN-LAST:event_stealTreasureActionPerformed
 
     private void makeVisibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeVisibleActionPerformed
@@ -392,6 +404,11 @@ public class PlayerView extends javax.swing.JPanel {
         napakalakiModel.makeTreasuresVisible(selHidden);
         setPlayer(napakalakiModel.getCurrentPlayer());
     }//GEN-LAST:event_makeVisibleActionPerformed
+
+    private void discardAllTreasuresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discardAllTreasuresActionPerformed
+        playerModel.discardAllTreasures();
+        setPlayer(napakalakiModel.getCurrentPlayer());
+    }//GEN-LAST:event_discardAllTreasuresActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -22,6 +22,7 @@ public class PlayerNamesCapture extends javax.swing.JDialog {
     public PlayerNamesCapture(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setTitle("Napakalaki Game");
         this.addWindowListener(new WindowAdapter(){
             @Override
             public void windowClosing (WindowEvent e){

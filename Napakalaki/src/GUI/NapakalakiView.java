@@ -20,9 +20,17 @@ public class NapakalakiView extends javax.swing.JFrame {
     //Setter
     public void setNapakalaki(Napakalaki aModel){
         napakalakiModel = aModel;
+        
+        this.currentPlayer.setNapakalaki(napakalakiModel);
+        this.currentMonster.setNapakalaki(napakalakiModel);
         this.currentPlayer.setPlayer(napakalakiModel.getCurrentPlayer());
         this.currentMonster.setMonster(napakalakiModel.getCurrentMonster());
         this.combatResult.setText(" ");
+        
+        currentMonster.setVisible(false);
+        meetMonster.setEnabled(true);
+        combat.setEnabled(false);
+        nextTurn.setEnabled(false);
         
         repaint();
     }
@@ -32,6 +40,7 @@ public class NapakalakiView extends javax.swing.JFrame {
      */
     public NapakalakiView() {
         initComponents();
+        setTitle("Napakalaki Game");
     }
 
     /**
@@ -72,7 +81,7 @@ public class NapakalakiView extends javax.swing.JFrame {
         );
         combatResultPanelLayout.setVerticalGroup(
             combatResultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(combatResult, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+            .addComponent(combatResult, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         monsterPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)), "Monstruo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 18), new java.awt.Color(0, 0, 0))); // NOI18N
@@ -100,6 +109,11 @@ public class NapakalakiView extends javax.swing.JFrame {
         meetMonster.setText("Mostrar Monstruo");
         meetMonster.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
         meetMonster.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        meetMonster.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                meetMonsterActionPerformed(evt);
+            }
+        });
 
         combat.setBackground(new java.awt.Color(204, 0, 0));
         combat.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
@@ -132,13 +146,13 @@ public class NapakalakiView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(nextTurn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(meetMonster, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(combat, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(combatResultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(nextTurn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(combatResultPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(monsterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
@@ -170,12 +184,33 @@ public class NapakalakiView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void combatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combatActionPerformed
-        // TODO add your handling code here:
+        CombatResult resultado;
+        resultado = napakalakiModel.developCombat();
+        
+        if(resultado == CombatResult.WIN)
+            this.combatResult.setText("GANASTE");
+        else if(resultado == CombatResult.LOSE)
+            this.combatResult.setText("PERDISTE");
+        else if(resultado == CombatResult.LOSEANDCONVERT)
+            this.combatResult.setText("CONVERSION A SECTARIO");
+        else
+            this.combatResult.setText("¡¡GANASTE EL JUEGO!!");
+        
+        currentPlayer.setPlayer(napakalakiModel.getCurrentPlayer());
+        combat.setEnabled(false);
+        nextTurn.setEnabled(true);
     }//GEN-LAST:event_combatActionPerformed
 
     private void nextTurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextTurnActionPerformed
-        // TODO add your handling code here:
+        if(napakalakiModel.nextTurn())
+            setNapakalaki(napakalakiModel);
     }//GEN-LAST:event_nextTurnActionPerformed
+
+    private void meetMonsterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meetMonsterActionPerformed
+        meetMonster.setEnabled(false);
+        currentMonster.setVisible(true);
+        combat.setEnabled(true);
+    }//GEN-LAST:event_meetMonsterActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
