@@ -13,12 +13,13 @@ import napakalaki.BadConsequence;
  */
 public class PendingBadConsequenceView extends javax.swing.JPanel {
     //Atributo
-    BadConsequence pendingBadConsequenceModel;
+    private BadConsequence pendingBadConsequenceModel;
     
     //Setter
     public void setPendingBadConsequence(BadConsequence aBadConsequence){
         pendingBadConsequenceModel = aBadConsequence;
-        this.pendingText.setText(pendingBadConsequenceModel.toString());
+        if(pendingBadConsequenceModel != null)
+            this.pendingText.setText(pendingBadConsequenceModel.toString());
         repaint();
     }
     /**
@@ -41,8 +42,9 @@ public class PendingBadConsequenceView extends javax.swing.JPanel {
         pendingText = new javax.swing.JTextArea();
 
         pendingText.setEditable(false);
-        pendingText.setBackground(new java.awt.Color(102, 102, 102));
+        pendingText.setBackground(new java.awt.Color(153, 153, 153));
         pendingText.setColumns(20);
+        pendingText.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         pendingText.setForeground(new java.awt.Color(0, 0, 0));
         pendingText.setRows(5);
         jScrollPane1.setViewportView(pendingText);

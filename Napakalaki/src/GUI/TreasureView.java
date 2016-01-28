@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import java.awt.Color;
 import napakalaki.Treasure;
 
 /**
@@ -12,8 +13,9 @@ import napakalaki.Treasure;
  * @author Lenovo
  */
 public class TreasureView extends javax.swing.JPanel {
-    //Atributo
-    Treasure treasureModel;
+    //Atributos
+    private Treasure treasureModel;
+    private boolean selected;
     
     //Setter
     public void setTreasure(Treasure aTreasure){
@@ -21,9 +23,21 @@ public class TreasureView extends javax.swing.JPanel {
         this.name.setText(treasureModel.getName());
         this.bonus.setText(Integer.toString(treasureModel.getBonus()));
         this.type.setText(treasureModel.getType().toString());
-        repaint();
         
+        selected = false;
+        repaint(); 
     }
+    
+    //Getter
+    public boolean isSelected(){
+        return selected;
+    }
+    
+    public Treasure getTreasure(){
+        return treasureModel;
+    }
+    
+    
     /**
      * Creates new form TreasureView
      */
@@ -45,6 +59,13 @@ public class TreasureView extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         name = new javax.swing.JTextArea();
 
+        setForeground(new java.awt.Color(102, 102, 102));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
+
         bonus.setFont(new java.awt.Font("sansserif", 1, 36)); // NOI18N
         bonus.setForeground(new java.awt.Color(0, 0, 0));
         bonus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -61,7 +82,7 @@ public class TreasureView extends javax.swing.JPanel {
         name.setEditable(false);
         name.setBackground(new java.awt.Color(153, 153, 153));
         name.setColumns(200);
-        name.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        name.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         name.setForeground(new java.awt.Color(0, 0, 0));
         name.setLineWrap(true);
         name.setRows(2);
@@ -92,6 +113,19 @@ public class TreasureView extends javax.swing.JPanel {
                 .addComponent(type))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        if(this.isSelected()){
+            selected = false;
+            setBackground(Color.WHITE);
+        }
+        else{
+            selected = true;
+            setBackground(Color.RED);
+        }
+        
+        repaint();
+    }//GEN-LAST:event_formMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

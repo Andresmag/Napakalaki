@@ -228,7 +228,7 @@ public class Player {
         Dice dice = Dice.getInstance();
         Treasure t;
         bringToLife();
-        int diceNumber = dice.nextNumber();
+        int diceNumber = dice.nextNumber("Turno de: ", getName());
         System.out.println("\nTIRADA DEL DADO : " + diceNumber);
         switch(diceNumber){
             case 1:
@@ -260,7 +260,7 @@ public class Player {
     
     protected boolean shouldConvert(){
         Dice dice = Dice.getInstance();
-        int number = dice.nextNumber();
+        int number = dice.nextNumber("Tirada para convertise en sectario; ", getName());
         System.out.append("Numero obtenido al tirar el dado: " + number + "\n");
         return (number == 1);
     }

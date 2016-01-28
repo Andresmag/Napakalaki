@@ -5,9 +5,11 @@
  */
 package GUI;
 
+import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import napakalaki.CultistPlayer;
+import napakalaki.Napakalaki;
 import napakalaki.Player;
 import napakalaki.Treasure;
 
@@ -17,7 +19,8 @@ import napakalaki.Treasure;
  */
 public class PlayerView extends javax.swing.JPanel {
     //Atributo
-    Player playerModel;
+    private Player playerModel;
+    private Napakalaki napakalakiModel;
     
     /**
      * Creates new form PlayerView
@@ -31,15 +34,19 @@ public class PlayerView extends javax.swing.JPanel {
         this.name.setText(playerModel.getName());
         this.nivelVar.setText(Integer.toString(playerModel.getLevels()));
         this.combatLevelVar.setText(Integer.toString(playerModel.getCombatLevel()));
+        this.enemyVar.setText(playerModel.getEnemyName());
+        this.pendingBadConsequenceVar.setPendingBadConsequence(playerModel.getPendingBadConsequence());
         
         if(playerModel.canISteal())
             this.canIStealVar.setText("Si");
         else
             this.canIStealVar.setText("No");
         
-        this.enemyVar.setText(playerModel.getEnemyName());
-        this.deathVar.setText(Boolean.toString(playerModel.isDead()));
-        this.pendingBadConsequenceVar.setPendingBadConsequence(playerModel.getPendingBadConsequence());
+        if(playerModel.isDead())
+            this.deathVar.setText("Muerto");
+        else
+            this.deathVar.setText("Vivo");
+        
         
         if( playerModel instanceof CultistPlayer)
             this.cultistPlayerVar.setText("Si");
@@ -71,7 +78,28 @@ public class PlayerView extends javax.swing.JPanel {
         aPanel.repaint();
         aPanel.revalidate();
     }
-
+    
+    public void setNapakalaki(Napakalaki aNapakalaki){
+        napakalakiModel = aNapakalaki;
+        repaint();
+    }
+    
+    private ArrayList<Treasure> getSelectedTreasures(JPanel aPanel) {
+        // Se recorren los tesoros que contiene el panel,
+        // almacenando en un vector aquellos que están seleccionados.
+        // Finalmente se devuelve dicho vector.
+        
+        TreasureView tv;
+        ArrayList<Treasure> output = new ArrayList();
+        for (Component c : aPanel.getComponents()) {
+            tv = (TreasureView) c;
+            if ( tv.isSelected() )
+                output.add ( tv.getTreasure() );
+        }
+        
+        return output;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -112,11 +140,11 @@ public class PlayerView extends javax.swing.JPanel {
         name.setForeground(new java.awt.Color(0, 0, 0));
         name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         name.setText("Nombre");
-        name.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        name.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(51, 51, 255)));
         name.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         name.setName(""); // NOI18N
 
-        Atributos.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.MatteBorder(null), javax.swing.BorderFactory.createEtchedBorder()), "Atributos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Viner Hand ITC", 2, 14), new java.awt.Color(0, 0, 0))); // NOI18N
+        Atributos.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)), "Atributos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Viner Hand ITC", 2, 14), new java.awt.Color(0, 0, 0))); // NOI18N
 
         nivel.setForeground(new java.awt.Color(0, 0, 0));
         nivel.setText("Nivel: ");
@@ -179,7 +207,7 @@ public class PlayerView extends javax.swing.JPanel {
                                 .addComponent(canISteal)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(canIStealVar)))))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         AtributosLayout.setVerticalGroup(
             AtributosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,7 +230,7 @@ public class PlayerView extends javax.swing.JPanel {
                     .addComponent(enemyVar)))
         );
 
-        pendingBadConsequence.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.MatteBorder(null), javax.swing.BorderFactory.createEtchedBorder()), "Mal rollo pendiente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Viner Hand ITC", 2, 14), new java.awt.Color(0, 0, 0))); // NOI18N
+        pendingBadConsequence.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)), "Mal rollo pendiente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Viner Hand ITC", 2, 14), new java.awt.Color(0, 0, 0))); // NOI18N
 
         javax.swing.GroupLayout pendingBadConsequenceLayout = new javax.swing.GroupLayout(pendingBadConsequence);
         pendingBadConsequence.setLayout(pendingBadConsequenceLayout);
@@ -214,12 +242,10 @@ public class PlayerView extends javax.swing.JPanel {
         );
         pendingBadConsequenceLayout.setVerticalGroup(
             pendingBadConsequenceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pendingBadConsequenceLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(pendingBadConsequenceVar, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(pendingBadConsequenceVar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
         );
 
-        cultistInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.MatteBorder(null), javax.swing.BorderFactory.createEtchedBorder()), "Informacion de sectarios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Viner Hand ITC", 2, 14), new java.awt.Color(0, 0, 0))); // NOI18N
+        cultistInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)), "Informacion de sectarios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Viner Hand ITC", 2, 14), new java.awt.Color(0, 0, 0))); // NOI18N
 
         cultistPlayer.setForeground(new java.awt.Color(0, 0, 0));
         cultistPlayer.setText("¿Soy sectario?:");
@@ -247,7 +273,7 @@ public class PlayerView extends javax.swing.JPanel {
                         .addComponent(numCultist)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(numCultistVar)))
-                .addGap(0, 83, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         cultistInfoLayout.setVerticalGroup(
             cultistInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,16 +288,21 @@ public class PlayerView extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        visibleTreasures.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.MatteBorder(null), javax.swing.BorderFactory.createEtchedBorder()), "Tesoros visibles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Viner Hand ITC", 2, 14), new java.awt.Color(0, 0, 0))); // NOI18N
+        visibleTreasures.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)), "Tesoros visibles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Viner Hand ITC", 2, 14), new java.awt.Color(0, 0, 0))); // NOI18N
 
-        hiddenTreasures.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.MatteBorder(null), javax.swing.BorderFactory.createEtchedBorder()), "Tesoros ocultos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Viner Hand ITC", 2, 14), new java.awt.Color(0, 0, 0))); // NOI18N
+        hiddenTreasures.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)), "Tesoros ocultos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Viner Hand ITC", 2, 14), new java.awt.Color(0, 0, 0))); // NOI18N
 
-        makeVisible.setBackground(new java.awt.Color(0, 153, 51));
+        makeVisible.setBackground(new java.awt.Color(0, 51, 51));
         makeVisible.setForeground(new java.awt.Color(255, 255, 255));
         makeVisible.setText("Make Visible");
         makeVisible.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        makeVisible.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                makeVisibleActionPerformed(evt);
+            }
+        });
 
-        stealTreasure.setBackground(new java.awt.Color(153, 0, 153));
+        stealTreasure.setBackground(new java.awt.Color(0, 51, 51));
         stealTreasure.setForeground(new java.awt.Color(255, 255, 255));
         stealTreasure.setText("Steal Treasure");
         stealTreasure.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -281,7 +312,7 @@ public class PlayerView extends javax.swing.JPanel {
             }
         });
 
-        discardTreasures.setBackground(new java.awt.Color(0, 0, 204));
+        discardTreasures.setBackground(new java.awt.Color(0, 51, 51));
         discardTreasures.setForeground(new java.awt.Color(255, 255, 255));
         discardTreasures.setText("Discard Treasures");
         discardTreasures.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -292,7 +323,7 @@ public class PlayerView extends javax.swing.JPanel {
             }
         });
 
-        discardAllTreasures.setBackground(new java.awt.Color(255, 0, 0));
+        discardAllTreasures.setBackground(new java.awt.Color(204, 0, 0));
         discardAllTreasures.setForeground(new java.awt.Color(255, 255, 255));
         discardAllTreasures.setText("Discard All Treasures");
         discardAllTreasures.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -303,19 +334,17 @@ public class PlayerView extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Atributos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(pendingBadConsequence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cultistInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(name, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cultistInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pendingBadConsequence, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Atributos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(makeVisible, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(stealTreasure, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                        .addComponent(stealTreasure, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(discardTreasures, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -329,7 +358,7 @@ public class PlayerView extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(discardTreasures, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
                             .addComponent(stealTreasure, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -339,16 +368,14 @@ public class PlayerView extends javax.swing.JPanel {
                         .addComponent(visibleTreasures, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(hiddenTreasures, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 7, Short.MAX_VALUE)
-                        .addComponent(name)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(name, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Atributos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pendingBadConsequence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cultistInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cultistInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -359,6 +386,12 @@ public class PlayerView extends javax.swing.JPanel {
     private void stealTreasureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stealTreasureActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_stealTreasureActionPerformed
+
+    private void makeVisibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeVisibleActionPerformed
+        ArrayList<Treasure> selHidden = getSelectedTreasures(hiddenTreasures);
+        napakalakiModel.makeTreasuresVisible(selHidden);
+        setPlayer(napakalakiModel.getCurrentPlayer());
+    }//GEN-LAST:event_makeVisibleActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
