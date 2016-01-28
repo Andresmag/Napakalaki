@@ -7,6 +7,7 @@ package GUI;
 
 import java.awt.Component;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import napakalaki.CultistPlayer;
 import napakalaki.Napakalaki;
@@ -59,6 +60,10 @@ public class PlayerView extends javax.swing.JPanel {
         this.fillTreasurePanel(visibleTreasures,playerModel.getVisibleTreasures());
         this.fillTreasurePanel(hiddenTreasures,playerModel.getHiddenTreasures());
         
+        stealTreasure.setEnabled(false);
+        discardTreasures.setEnabled(false);
+        discardAllTreasures.setEnabled(false);
+        
         repaint();
         revalidate();
     }
@@ -98,6 +103,22 @@ public class PlayerView extends javax.swing.JPanel {
         }
         
         return output;
+    }
+    
+    public void setMakeVisible(boolean set){
+        makeVisible.setEnabled(set);
+    }
+
+    public void setDiscardTreasures(boolean set) {
+        discardTreasures.setEnabled(set);
+    }
+    
+    public void setDiscardAllTreasures(boolean set){
+        discardAllTreasures.setEnabled(set);
+    }
+    
+    public void setSteal(boolean set){
+        stealTreasure.setEnabled(set);
     }
     
     /**
@@ -392,22 +413,44 @@ public class PlayerView extends javax.swing.JPanel {
         napakalakiModel.discardVisibleTreasures(selVisible);
         
         setPlayer(napakalakiModel.getCurrentPlayer());
+        
+        makeVisible.setEnabled(true);
+        discardTreasures.setEnabled(true);
+        discardAllTreasures.setEnabled(true);
+        stealTreasure.setEnabled(true);
     }//GEN-LAST:event_discardTreasuresActionPerformed
 
     private void stealTreasureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stealTreasureActionPerformed
-        playerModel.stealTreasure();
-        setPlayer(napakalakiModel.getCurrentPlayer());
+        if(playerModel.canISteal()){
+            playerModel.stealTreasure();
+            setPlayer(napakalakiModel.getCurrentPlayer());
+        }
+        
+        makeVisible.setEnabled(true);
+        discardTreasures.setEnabled(true);
+        discardAllTreasures.setEnabled(true);
+        stealTreasure.setEnabled(true);
     }//GEN-LAST:event_stealTreasureActionPerformed
 
     private void makeVisibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeVisibleActionPerformed
         ArrayList<Treasure> selHidden = getSelectedTreasures(hiddenTreasures);
         napakalakiModel.makeTreasuresVisible(selHidden);
         setPlayer(napakalakiModel.getCurrentPlayer());
+        
+        makeVisible.setEnabled(true);
+        discardTreasures.setEnabled(true);
+        discardAllTreasures.setEnabled(true);
+        stealTreasure.setEnabled(true);
     }//GEN-LAST:event_makeVisibleActionPerformed
 
     private void discardAllTreasuresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discardAllTreasuresActionPerformed
         playerModel.discardAllTreasures();
         setPlayer(napakalakiModel.getCurrentPlayer());
+        
+        makeVisible.setEnabled(true);
+        discardTreasures.setEnabled(true);
+        discardAllTreasures.setEnabled(true);
+        stealTreasure.setEnabled(true);
     }//GEN-LAST:event_discardAllTreasuresActionPerformed
 
 

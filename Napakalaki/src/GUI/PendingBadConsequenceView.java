@@ -18,8 +18,15 @@ public class PendingBadConsequenceView extends javax.swing.JPanel {
     //Setter
     public void setPendingBadConsequence(BadConsequence aBadConsequence){
         pendingBadConsequenceModel = aBadConsequence;
-        if(pendingBadConsequenceModel != null)
-            this.pendingText.setText(pendingBadConsequenceModel.toString());
+        if(pendingBadConsequenceModel != null){ 
+            if(pendingBadConsequenceModel.isEmpty())
+                this.pendingText.setText(" ");
+            else
+                this.pendingText.setText(pendingBadConsequenceModel.toString());
+        }
+        else
+            this.pendingText.setText(" ");
+        
         repaint();
     }
     /**
@@ -46,7 +53,9 @@ public class PendingBadConsequenceView extends javax.swing.JPanel {
         pendingText.setColumns(14);
         pendingText.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         pendingText.setForeground(new java.awt.Color(0, 0, 0));
+        pendingText.setLineWrap(true);
         pendingText.setRows(5);
+        pendingText.setWrapStyleWord(true);
         jScrollPane1.setViewportView(pendingText);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

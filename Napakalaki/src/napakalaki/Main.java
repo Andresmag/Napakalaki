@@ -6,6 +6,7 @@
 package napakalaki;
 
 import GUI.Dice;
+import GUI.Fin;
 import GUI.NapakalakiView;
 import GUI.PlayerNamesCapture;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class Main {
         
         game.initGame(names);
         napakalakiView.setNapakalaki(game);
-        
+
         napakalakiView.setVisible(true);
     }
 }
